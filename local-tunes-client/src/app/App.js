@@ -4,7 +4,8 @@ import * as Routes from './routes'
 
 import {
     Login,
-    Register
+    Register,
+    Home
 } from './pages';
 import './styles/App.scss';
 
@@ -16,6 +17,8 @@ function App () {
                 <Switch>
                     <Route exact path={Routes.LOGIN} component={Login}/>
                     <Route exact path={Routes.REGISTER} component={Register}/>
+                    
+                    <Route exact path={Routes.Home} component={Home}/>
                 </Switch>
             </Router>
         </div>

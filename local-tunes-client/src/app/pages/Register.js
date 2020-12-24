@@ -5,7 +5,7 @@ const Register = () => {
 
     return (
         <div>
-        <Header />
+        <Header/>
         <div className="row">
             <div className="col-12 o-form">
                 <form className="m-form">
@@ -14,6 +14,12 @@ const Register = () => {
                     <label for="password" className="a-authTextLabel">Password</label>
                     <input type="password" name="password" className="a-authTextInput"></input>
                     <label for="username" className="a-authTextLabel">Are you...</label>
+                    <div className="m-authRadioButton">
+                        <label for="listener">Listener</label>
+                        <input type="radio" name="listener" value="listener" className="a-authRadioButton"></input>
+                        <label for="listener">Listener</label>s
+                        <input type="radio" name="subject" value="phyArtiestsics" className="a-authRadioButton"></input>
+                    </div>
                     <button type="submit" className="a-authButton">Login</button>
                 </form>
             </div>

@@ -1,0 +1,85 @@
+.o-homeHeader {
+    background-color: $main-color;
+    color: $white-color;
+    height: 20vh;
+    border-radius: 0 0 24px 24px;
+
+    .m-Location {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .a-locationTitle {
+            color: $accent-color;
+            font-weight: 200;
+            font-size: 13pt;
+        }
+
+        .a-locationLogo {
+            font-size: 19pt;
+            margin: 0.5rem 0;
+        }
+
+        .a-locationCurrent {
+            font-weight: 600;
+            font-size: 15pt;
+            color: $accent-color;
+
+        }
+    }
+
+    .m-settings {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 1rem;
+        padding-right: 1rem;
+
+        .a-settingsLogo {
+            font-size: 19pt;
+            color: $accent-color;
+        }
+    }
+
+    .m-slider {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: 0.7rem;
+    }
+    .a-slider {
+        margin: 0 auto;
+    }
+
+}
+
+.o-homeSection {
+    color: $white-color;
+    
+    .a-homeSectionTitle {
+        padding: 1rem;
+        font-weight: 700;
+        font-size: 16pt;
+    }
+
+    .o-releaseCard {
+
+        .m-releaseCard {
+            display: flex;
+            flex-direction: column;
+            padding: 3px;
+            text-align: center;
+            .a-cardImg {
+                width: 100%;
+                border-radius: 3px;
+            }
+            .a-albumTitleHome {
+                padding-top: 0.2rem;
+                font-weight: 700;
+            }
+            .a-albumArtistHome {
+                font-weight: 200;
+            }
+        }
+    }
+}

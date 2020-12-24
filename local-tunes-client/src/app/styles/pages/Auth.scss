@@ -22,4 +22,12 @@
         border-radius: 7px;
         border: none;
     }
+    .m-authRadioButton {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .a-authRadioButton {
+        height: 30px;
+    }
 }
