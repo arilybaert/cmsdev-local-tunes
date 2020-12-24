@@ -1,0 +1,25 @@
+.o-form {
+    padding-top: 5rem;
+    color: $white-color;
+    .m-form {
+        display: flex;
+        flex-direction: column;
+    }
+    .a-authTextInput {
+        border: none;
+        border-radius: 7px;
+        height: 43px;
+        margin-top: 0.7rem;
+    }
+    .a-authTextLabel {
+        margin-top: 0.7rem;
+    }
+    .a-authButton {
+        color: $accent-color;
+        background-color: $main-color;
+        height: 43px;
+        margin-top: 1rem;
+        border-radius: 7px;
+        border: none;
+    }
+}
