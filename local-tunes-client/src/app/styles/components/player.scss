@@ -3,9 +3,11 @@
     bottom: 0;
     right: 0;
     left: 0;
-    height: 15vh;
+    height: 18vh;
     color: $white-color;
-    background-color: rgba(135, 145, 49, 0.664);
+    background-color: rgba(93, 89, 89, 0.54);
+    backdrop-filter: blur(10px);  
+    border-radius: 15px 15px 0 0 ;
 
     .a-playerImg {
         padding: 15px;

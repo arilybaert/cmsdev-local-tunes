@@ -1,9 +1,13 @@
+import Collection from './Collection';
 import Login from './Login';
 import Home from './Home';
 import Register from './Register';
+import Search from './Search';
 
 export {
-    Register,
+    Collection,
+    Home,
     Login,
-    Home
+    Register,
+    Search,
 };

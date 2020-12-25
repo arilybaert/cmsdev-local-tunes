@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 
+import {Navigation} from '../../components';
 const Player = () => {
 
     const [playerStatus, setPlayerStatus] = useState(false);
@@ -31,6 +32,8 @@ const Player = () => {
                     <FontAwesomeIcon icon={!playerStatus ? faPause : faPlay} className="a-playLogo" onClick={handleMiniPlayerClick}/>
                 </div>
             </div>
+
+            <Navigation/>
         </div>
     )
 }

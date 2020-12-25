@@ -1,0 +1,25 @@
+.o-navigationBottom {
+    background-color: $main-color;
+    border-radius: 30px;
+    margin:  0 16px;
+    height: 3rem;
+
+    .m-navigationBottom {
+        display: flex;
+        height: 100%;
+    }
+    .a-navigationBottom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .a-navLogo {
+            font-size: 18pt;
+            color: $accent-color;
+        }
+        .a-activeNav {
+            color: $white-color;
+        }
+    }
+}

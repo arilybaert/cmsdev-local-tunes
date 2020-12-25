@@ -3,9 +3,11 @@ import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import * as Routes from './routes'
 
 import {
+    Collection,
+    Home,
     Login,
     Register,
-    Home
+    Search
 } from './pages';
 import './styles/App.scss';
 
@@ -18,7 +20,9 @@ function App () {
                     <Route exact path={Routes.LOGIN} component={Login}/>
                     <Route exact path={Routes.REGISTER} component={Register}/>
                     
-                    <Route exact path={Routes.Home} component={Home}/>
+                    <Route exact path={Routes.HOME} component={Home}/>
+                    <Route exact path={Routes.SEARCH} component={Search}/>
+                    <Route exact path={Routes.COLLECTION} component={Collection}/>
                 </Switch>
             </Router>
         </div>
