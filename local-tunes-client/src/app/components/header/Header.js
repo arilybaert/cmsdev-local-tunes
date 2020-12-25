@@ -4,6 +4,7 @@ import {
   } from "react-router-dom";
 import * as Routes from '../../routes';
 const Header = () => {
+    // eslint-disable-next-line
     const [header, setHeader] = useState(window.location.pathname.substring(1));
 
     // Give active navbar items a specific style

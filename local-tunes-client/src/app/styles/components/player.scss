@@ -1,0 +1,38 @@
+.o-player {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 15vh;
+    color: $white-color;
+    background-color: rgba(135, 145, 49, 0.664);
+
+    .a-playerImg {
+        padding: 15px;
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .m-currentTrackMiniPlayer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        .a-currentTrackMiniPlayer {
+            font-weight: 700;
+        }
+        .a-currentAlbumMiniPlayer {
+            font-weight: 200;
+        }
+        
+    }
+    .m-playerIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .a-playLogo {
+            font-size: 20pt;
+        }
+    }
+}

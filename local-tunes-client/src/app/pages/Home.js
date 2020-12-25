@@ -1,7 +1,9 @@
 import React from 'react';
+import {Player} from '../components';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+
 const Home = () => {
     // var slider = document.getElementById("myRange");
     // var output = document.getElementById("demo");
@@ -116,6 +118,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
+
+
+            <Player/>
         </div>
     )
 }
