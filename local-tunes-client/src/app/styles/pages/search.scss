@@ -1,0 +1,76 @@
+
+$search-color-1: #8BE6FA;
+$search-color-2: #D8F8FF;
+$search-color-3: #BEF2EA;
+$search-color-4: #FFD8D8;
+$search-color-5: #E8F2BE;
+$search-color-6: #F2E1BE;
+$search-color-7: #FAED8B;
+
+.o-masonry {
+    columns: 3;
+    column-gap: 0.7rem;
+    margin-top: 1rem;
+    padding-bottom: 9rem;
+    height: auto;
+    .o-masonryCommon {
+        margin: 0 1rem 1rem 0;
+        width: 100%;
+        display: inline-block;
+        border-radius: 9px;
+
+        .m-masonry {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            color: $black-color;
+            font-weight: 700;
+            font-size: 18pt;
+            text-align: center;
+        }
+    }
+    .o-mansonry-1 {
+        background-color: $search-color-1;
+        height: 23vh;
+    }
+    .o-mansonry-2 {
+        background-color: $search-color-2;
+        height: 13vh;
+
+    }
+    .o-mansonry-3 {
+        background-color: $search-color-3;
+        height: 33vh;
+    }
+    .o-mansonry-4 {
+        background-color: $search-color-4;
+        height: 31vh;
+    }
+    .o-mansonry-5 {
+        background-color: $search-color-5;
+        height: 11vh;
+    }
+    .o-mansonry-6 {
+        background-color: $search-color-6;
+        height: 13vh;
+    }
+    .o-mansonry-7 {
+        background-color: $search-color-7;
+        height: 15vh;
+    }
+    .o-mansonry-8 {
+        background-color: $search-color-1;
+        height: 24vh;
+    }
+    .o-mansonry-9 {
+        background-color: $search-color-2;
+        height: 22vh;
+    }
+
+}
+
+
+
+
