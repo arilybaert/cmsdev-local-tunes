@@ -1,21 +1,35 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 
 import * as Routes from '../../routes';
 
-const CollectionContent = () => {
-    // let { type } = useParams();
-    // console.log(type);
+import { LocalTunesContext } from '../../components';
 
+const CollectionContent = () => {
+    
+    const { collectionHeader, setCollectionHeader} = useContext(LocalTunesContext);
+    // Give active navbar items a specific style
+    const handleCollectionNav = (nav) => {
+        console.log(`click: ${nav}`);
+
+        setCollectionHeader(nav);
+    }
+    useEffect(() => {
+        console.log(collectionHeader);
+        document.getElementById("playlists").classList.remove("a-activeCollectionLink");
+        document.getElementById("artists").classList.remove("a-activeCollectionLink");
+        document.getElementById("songs").classList.remove("a-activeCollectionLink");
+        document.getElementById(collectionHeader).classList.add("a-activeCollectionLink");
+    },[collectionHeader]);
     return (
         <div className="row o-homeHeader">
                 <div className="col-12 m-searchTitle">
                     <h2>Library</h2>
                 </div>
                 <div className="col-12 o-collectionNav">
-                    <Link to={`${Routes.COLLECTION}/playlist`} className="a-collectionLink">Playlists</Link>
-                    <Link to={Routes.ARTISTS} className="a-collectionLink">Artists</Link>
-                    <Link to={Routes.SONGS} className="a-collectionLink">Songs</Link>
+                    <span className="a-collectionLink" id="playlists" onClick={()=> handleCollectionNav("playlists")}>Playlists</span>
+                    <span className="a-collectionLink" id="artists" onClick={()=> handleCollectionNav("artists")}>Artists</span>
+                    <span className="a-collectionLink" id="songs" onClick={()=> handleCollectionNav("songs")}>Songs</span>
                 </div>
             </div>
     )

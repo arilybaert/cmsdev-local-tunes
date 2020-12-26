@@ -1,7 +1,8 @@
 import React from'react';
 import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import * as Routes from './routes'
 
+import * as Routes from './routes'
+import { LocalTunesContextProvider } from './components';
 import {
     Collection,
     Home,
@@ -15,19 +16,23 @@ function App () {
 
     return (
         <div className="container-fluid">
-            <Router>
-                <Switch>
-                    <Route exact path={Routes.HOMESHORT}>
-                        <Redirect to={Routes.HOME} />
-                    </Route>
-                    <Route exact path={Routes.LOGIN} component={Login}/>
-                    <Route exact path={Routes.REGISTER} component={Register}/>
-                    
-                    <Route exact path={Routes.HOME} component={Home}/>
-                    <Route exact path={Routes.DISCOVER} component={Discover}/>
-                    <Route path={Routes.COLLECTION} component={Collection}/>
-                </Switch>
-            </Router>
+            <LocalTunesContextProvider>
+
+                <Router>
+                    <Switch>
+                        <Route exact path={Routes.HOMESHORT}>
+                            <Redirect to={Routes.HOME} />
+                        </Route>
+                        <Route exact path={Routes.LOGIN} component={Login}/>
+                        <Route exact path={Routes.REGISTER} component={Register}/>
+                        
+                        <Route exact path={Routes.HOME} component={Home}/>
+                        <Route exact path={Routes.DISCOVER} component={Discover}/>
+                        <Route path={Routes.COLLECTION} component={Collection}/>
+                    </Switch>
+                </Router>
+
+            </LocalTunesContextProvider>
         </div>
     )
 }

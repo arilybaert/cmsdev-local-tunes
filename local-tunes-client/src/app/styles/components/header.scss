@@ -94,8 +94,12 @@
     font-size: 14pt;
     font-weight: 560;
 
+    .a-activeCollectionLink {
+        border-bottom: 1px solid $accent-color;
+    }
     .a-collectionLink {
-
+        height: min-content;
+        padding-bottom: 0.7rem;
     }
     a:link {
         color: $white-color;

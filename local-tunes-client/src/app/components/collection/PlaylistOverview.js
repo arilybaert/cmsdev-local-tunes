@@ -3,6 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faTrash } from '@fortawesome/free-solid-svg-icons';
 const PlaylistOverview = () => {
 
+    const handleTrash = () => {
+        let result = window.confirm("Want to delete?");
+        if (result) {
+            console.log("deleted playlist");
+        }
+    }
     return (
         <div className="row o-collectionPlaylistOverview">
             <div className="col-12">
@@ -13,8 +19,8 @@ const PlaylistOverview = () => {
                     <div className="col-6 m-playlistOveriewTitle">
                         <span>Create playlist</span>
                     </div>
-                    <div className="col-3 m-listOverviewButton">
-                        <FontAwesomeIcon icon={faTrash} className="a-listOverviewButton" id="discover"/>
+                    <div className="col-3 m-listOverviewButton" >
+                        {/* <FontAwesomeIcon icon={faTrash} className="a-listOverviewButton" id="discover"/> */}
                     </div>
                 </div>
                 <div className="row m-playlistOveriew">
@@ -24,8 +30,8 @@ const PlaylistOverview = () => {
                     <div className="col-6 m-playlistOveriewTitle">
                         <span>Funk Blues</span>
                     </div>
-                    <div className="col-3 m-listOverviewButton">
-                        <FontAwesomeIcon icon={faTrash} className="a-listOverviewButton" id="discover"/>
+                    <div className="col-3 m-listOverviewButton" onClick={handleTrash}>
+                        <FontAwesomeIcon icon={faTrash} className="a-listOverviewButton" id="discover" />
                     </div>
                 </div>
             </div>
