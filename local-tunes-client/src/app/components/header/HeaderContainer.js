@@ -10,12 +10,12 @@ const HeaderContainer = () => {
     const [header, setHeader] = useState(window.location.pathname);
 
     useEffect(() => {
-        console.log(header);
+        // console.log(header);
     }, [header]);
     return (
         <div>
             {header && header=== Routes.HOME ? <HomeContent/> : ''}
-            {header && header=== Routes.SEARCH ? <SearchContent/> : ''}
+            {header && header=== Routes.DISCOVER ? <SearchContent/> : ''}
         </div>
     )
 }

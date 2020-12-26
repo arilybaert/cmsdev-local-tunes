@@ -7,7 +7,7 @@ import {
     Home,
     Login,
     Register,
-    Search
+    Discover
 } from './pages';
 import './styles/App.scss';
 
@@ -24,7 +24,7 @@ function App () {
                     <Route exact path={Routes.REGISTER} component={Register}/>
                     
                     <Route exact path={Routes.HOME} component={Home}/>
-                    <Route exact path={Routes.SEARCH} component={Search}/>
+                    <Route exact path={Routes.DISCOVER} component={Discover}/>
                     <Route exact path={Routes.COLLECTION} component={Collection}/>
                 </Switch>
             </Router>

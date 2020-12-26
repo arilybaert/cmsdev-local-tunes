@@ -1,6 +1,6 @@
 import React from 'react';
 import {Player, HeaderContainer} from '../components';
-const Search = () => {
+const Discover = () => {
 
     return (
         <div>
@@ -58,4 +58,4 @@ const Search = () => {
     )
 }
 
-export default Search;
+export default Discover;

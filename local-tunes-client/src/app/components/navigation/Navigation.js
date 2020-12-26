@@ -15,7 +15,7 @@ const Navigation = () => {
         // document.getElementById("home").classList.remove = "a-activeNav"; 
         // document.getElementById("search").classList.remove = "a-activeNav"; 
         // document.getElementById("collection").classList.remove = "a-activeNav"; 
-    
+        console.log(header);
         document.getElementById(header).classList.add("a-activeNav");
     },[header]);
 
@@ -27,8 +27,8 @@ const Navigation = () => {
                 <Link to={Routes.HOME} className="col-4 a-navigationBottom" >
                     <FontAwesomeIcon icon={faHome} className="a-navLogo" id="home"/>
                 </Link>
-                <Link to={Routes.SEARCH} className="col-4 a-navigationBottom" >
-                    <FontAwesomeIcon icon={faSearch} className="a-navLogo" id="search"/>
+                <Link to={Routes.DISCOVER} className="col-4 a-navigationBottom" >
+                    <FontAwesomeIcon icon={faSearch} className="a-navLogo" id="discover"/>
                 </Link>
                 <Link to={Routes.COLLECTION} className="col-4 a-navigationBottom" >
                     <FontAwesomeIcon icon={faCompactDisc} className="a-navLogo" id="collection"/>
