@@ -1,7 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import {Link} from 'react-router-dom';
 
-import * as Routes from '../../routes';
 
 import { LocalTunesContext } from '../../components';
 
@@ -10,12 +8,10 @@ const CollectionContent = () => {
     const { collectionHeader, setCollectionHeader} = useContext(LocalTunesContext);
     // Give active navbar items a specific style
     const handleCollectionNav = (nav) => {
-        console.log(`click: ${nav}`);
 
         setCollectionHeader(nav);
     }
     useEffect(() => {
-        console.log(collectionHeader);
         document.getElementById("playlists").classList.remove("a-activeCollectionLink");
         document.getElementById("artists").classList.remove("a-activeCollectionLink");
         document.getElementById("songs").classList.remove("a-activeCollectionLink");

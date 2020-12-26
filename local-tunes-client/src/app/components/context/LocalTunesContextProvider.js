@@ -4,7 +4,7 @@ const LocalTunesContext = createContext();
 
 const LocalTunesContextProvider = ({children}) => {
 
-    const [ collectionHeader, setCollectionHeader ] = useState('playlists');
+    const [ collectionHeader, setCollectionHeader ] = useState("playlists");
 
     return (
         <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader}}>

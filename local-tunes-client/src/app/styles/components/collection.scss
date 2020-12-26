@@ -27,3 +27,34 @@
         
     }
 }
+.o-collectionArtistOverview {
+    padding-top: 1rem;
+    padding-bottom: 9rem;
+
+    .m-artistOveriew {
+
+        margin: 0.6rem 0;
+        color: $white-color;
+        .a-artistOverviewImage {
+            width: 5vh;
+            height: 5vh;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .m-artistOveriewTitle {
+            display: flex;
+            align-items: center;
+            font-size: 15pt;
+            font-weight: 550;
+        }
+        .m-artistOverviewButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .a-artistOverviewButton {
+                font-size: 18pt;
+            }
+        }
+        
+    }
+}
