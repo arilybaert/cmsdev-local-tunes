@@ -1,9 +1,10 @@
 import React from 'react';
-import {Player} from '../components';
+import {Player, HeaderContainer} from '../components';
 const Search = () => {
 
     return (
         <div>
+            <HeaderContainer/>
             <Player/>
         </div>
     )

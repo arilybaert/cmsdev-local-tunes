@@ -42,3 +42,46 @@
         text-decoration: none;
     } 
 }
+.o-homeHeader {
+    background-color: $main-color;
+    color: $white-color;
+    height: 20vh;
+    border-radius: 0 0 24px 24px; 
+}
+
+/*
+    search header
+*/
+.m-searchTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $accent-color;
+}
+// form
+.o-searchField {
+    display: flex;
+    justify-content: center;
+
+
+    .a-searchInput {
+        border: none;
+        border-radius: 6px 0 0 6px;
+        height: 2.6rem;
+        width: 60vw;
+        padding: 0 1rem;
+        background-color: $white-color;
+        color: $main-color;
+
+
+    }
+
+    .a-searchButton {
+        height: 2.6rem;
+        border: none;
+        border-radius: 0 6px 6px 0;
+        padding: 0 0.7rem ;
+        background-color: $white-color;
+        color: $main-color;
+    }
+}

@@ -1,8 +1,7 @@
 import React from 'react';
-import {Player} from '../components';
+import {Player, HeaderContainer} from '../components';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCog, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+
 
 const Home = () => {
     // var slider = document.getElementById("myRange");
@@ -15,23 +14,7 @@ const Home = () => {
     // }
     return (
         <div>
-            <div className="row o-homeHeader">
-                <div className="col-4"></div>
-                <div className="col-4 m-Location">
-                    <span className="a-locationTitle">Location</span>
-                    <span>
-                        <FontAwesomeIcon icon={faMapMarkerAlt} className="a-locationLogo"/>
-                    </span>
-                    <span className="a-locationCurrent">Brussels</span>
-                </div>
-                <div className="col-4 m-settings">
-                    <FontAwesomeIcon icon={faCog} className="a-settingsLogo"/>
-                </div>
-                <div className="col-12 m-slider">
-                <input type="range" min="1" max="100" value="50" className="a-slider" id="myRange"></input>    
-                <span id="demo"></span>
-                </div>
-            </div>
+            <HeaderContainer/>
 
             <div className="row o-homeSection">
                 <div className="col-12 a-homeSectionTitle">All New Release</div>

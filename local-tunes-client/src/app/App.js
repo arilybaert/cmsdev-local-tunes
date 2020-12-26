@@ -1,5 +1,5 @@
 import React from'react';
-import {BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import * as Routes from './routes'
 
 import {
@@ -17,6 +17,9 @@ function App () {
         <div className="container-fluid">
             <Router>
                 <Switch>
+                    <Route exact path={Routes.HOMESHORT}>
+                        <Redirect to={Routes.HOME} />
+                    </Route>
                     <Route exact path={Routes.LOGIN} component={Login}/>
                     <Route exact path={Routes.REGISTER} component={Register}/>
                     
