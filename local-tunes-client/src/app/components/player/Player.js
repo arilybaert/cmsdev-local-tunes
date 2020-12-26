@@ -11,10 +11,10 @@ const Player = () => {
         setPlayerStatus(!playerStatus);
     };
 
-    useEffect(() => {
-        console.log(playerStatus);
+    // useEffect(() => {
+    //     console.log(playerStatus);
 
-    }, [playerStatus]);
+    // }, [playerStatus]);
 
     return (
         <div className="o-player">

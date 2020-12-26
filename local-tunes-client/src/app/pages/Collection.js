@@ -1,10 +1,11 @@
 import React from 'react';
-import {Player} from '../components';
-
+import {Player, HeaderContainer, PlaylistOverview} from '../components';
 const Collection = () => {
 
     return (
         <div>
+            <HeaderContainer/>
+            <PlaylistOverview/>
             <Player/>
         </div>
     )

@@ -4,6 +4,7 @@
 @import 'components/header.scss';
 @import 'components/player.scss';
 @import 'components/navigation.scss';
+@import 'components/collection.scss';
 
 @import 'pages/auth.scss';
 @import 'pages/home.scss';
@@ -17,4 +18,5 @@
 .container-fluid {
     min-height: 100vh;
     background-color: $black-color;
+    
 }

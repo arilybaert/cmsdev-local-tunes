@@ -25,7 +25,7 @@ function App () {
                     
                     <Route exact path={Routes.HOME} component={Home}/>
                     <Route exact path={Routes.DISCOVER} component={Discover}/>
-                    <Route exact path={Routes.COLLECTION} component={Collection}/>
+                    <Route path={Routes.COLLECTION} component={Collection}/>
                 </Switch>
             </Router>
         </div>

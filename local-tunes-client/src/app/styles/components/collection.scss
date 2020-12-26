@@ -1,0 +1,29 @@
+.o-collectionPlaylistOverview {
+    padding-bottom: 9rem;
+
+    .m-playlistOveriew {
+
+        margin: 1rem 0;
+        color: $white-color;
+        .a-PlaylistOverviewImage {
+            width: 9vh;
+            height: 9vh;
+            object-fit: cover;
+        }
+        .m-playlistOveriewTitle {
+            display: flex;
+            align-items: center;
+            font-size: 15pt;
+            font-weight: 550;
+        }
+        .m-listOverviewButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .a-listOverviewButton {
+                font-size: 18pt;
+            }
+        }
+        
+    }
+}

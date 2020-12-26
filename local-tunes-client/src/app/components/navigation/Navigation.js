@@ -15,7 +15,7 @@ const Navigation = () => {
         // document.getElementById("home").classList.remove = "a-activeNav"; 
         // document.getElementById("search").classList.remove = "a-activeNav"; 
         // document.getElementById("collection").classList.remove = "a-activeNav"; 
-        console.log(header);
+        // console.log(header);
         document.getElementById(header).classList.add("a-activeNav");
     },[header]);
 

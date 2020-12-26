@@ -85,3 +85,29 @@
         color: $main-color;
     }
 }
+/*
+    collection header
+*/
+.o-collectionNav {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 14pt;
+    font-weight: 560;
+
+    .a-collectionLink {
+
+    }
+    a:link {
+        color: $white-color;
+        text-decoration: none;
+      }
+    a:visited {
+        color: $white-color;
+    }
+    a:hover {
+        color: $white-color;
+    }
+    a:active {
+        color: $white-color;
+    }
+}

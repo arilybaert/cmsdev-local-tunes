@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import HomeContent from './HomeContent';
-import SearchContent from './SearchContent';
+
+
+import { HomeContent, SearchContent, CollectionContent} from '../header'
 import * as Routes from '../../routes';
 
 
@@ -14,8 +15,9 @@ const HeaderContainer = () => {
     }, [header]);
     return (
         <div>
-            {header && header=== Routes.HOME ? <HomeContent/> : ''}
-            {header && header=== Routes.DISCOVER ? <SearchContent/> : ''}
+            {header && header === Routes.HOME ? <HomeContent/> : ''}
+            {header && header === Routes.DISCOVER ? <SearchContent/> : ''}
+            {header && header === Routes.COLLECTION ? <CollectionContent/> : ''}
         </div>
     )
 }
