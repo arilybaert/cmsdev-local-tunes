@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faHeart } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,7 +15,7 @@ const ArtistOverview = () => {
     return (
         <div className="row o-collectionArtistOverview">
 
-            <div className="row m-artistOveriew">
+            <Link to="/collection/artist/1" className="row m-artistOveriew">
                 <div className="col-3">
                     <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-artistOverviewImage"></img>
                 </div>
@@ -24,7 +25,7 @@ const ArtistOverview = () => {
                 <div className="col-3 m-artistOverviewButton" onClick={handleTrash}>
                     <FontAwesomeIcon icon={faHeart} className="a-artistOverviewButton" id="discover" />
                 </div>
-            </div>
+            </Link>
 
             <div className="row m-artistOveriew">
                 <div className="col-3">

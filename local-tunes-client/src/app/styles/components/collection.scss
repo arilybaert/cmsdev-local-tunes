@@ -26,6 +26,22 @@
         }
         
     }
+    a:link {
+        color: $white-color;
+        text-decoration: none;
+    }
+    a:visited {
+        color: $white-color;
+        text-decoration: none;
+    }
+    a:hover {
+        color: $white-color;
+        text-decoration: none;
+    }
+    a:active {
+        color: $white-color;
+        text-decoration: none;
+    }
 }
 
 // playlist detail
@@ -84,6 +100,79 @@
         }
         
     }
+}
+.a-artistDetailCover {
+    border-radius: 50%;
+    width: 21vw;
+    height: 21vw;
+}
+
+.o-artistSection {
+    color: $white-color;
+    padding-bottom: 9rem;
+    
+        .a-artistSectionTitle {
+            padding: 1rem;
+            font-weight: 700;
+            font-size: 16pt;
+        }
+    
+        .o-artistAlbumCard {
+            margin-bottom: 1rem;
+            .m-artistAlbumCard {
+                display: flex;
+                flex-direction: column;
+                padding: 2px;
+                .a-cardAlbumImg {
+                    width: 100%;
+                    border-radius: 3px;
+                }
+                .a-albumTitleArtist {
+                    padding-top: 0.2rem;
+                    font-weight: 700;
+                }
+
+            }
+        }
+
+        .m-songArtistOveriew {
+
+            margin-bottom: 0.6rem;
+            color: $white-color;
+            .a-songArtistOverviewImage {
+                width: 5vh;
+                height: 5vh;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+            .m-songOveriewTitle {
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                flex-direction: column;
+    
+                .a-songOveriewTitle {
+                    font-size: 12pt;
+                    font-weight: 550;
+                }
+
+            }
+            .m-songOverviewButton {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+    
+                .a-songOverviewButton {
+                    font-size: 15pt;
+                    color: $accent-color;
+                }
+                .a-songOverviewButtonAlt {
+                    font-size: 15pt;
+                    color: $white-color;
+                }
+            }
+            
+        }
 }
 /*
     Song

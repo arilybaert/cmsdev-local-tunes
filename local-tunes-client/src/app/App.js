@@ -9,7 +9,8 @@ import {
     Login,
     Register,
     Discover,
-    Playlist
+    Playlist,
+    Artist
 } from './pages';
 import './styles/App.scss';
 
@@ -32,6 +33,7 @@ function App () {
                         <Route exact path={Routes.COLLECTION} component={Collection}/>
 
                         <Route exact path={Routes.PLAYLIST} component={Playlist}/>
+                        <Route exact path={Routes.ARTIST} component={Artist}/>
                     </Switch>
                 </Router>
 

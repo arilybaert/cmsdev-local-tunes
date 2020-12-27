@@ -1,19 +1,24 @@
-import React, {  useContext } from 'react';
-import {HeaderContainer, Player } from '../components';
-
+import React, {  useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faHeart, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
+import {HeaderContainer, Player, LocalTunesContext } from '../components';
 import SongPopup from '../components/songPopup';
-
-import { LocalTunesContext } from '../components';
-
 
 
 const Playlist = () => {
     const { popupState, setPopupState} = useContext(LocalTunesContext);
+    const { setPlaylistTitle, setPlaylistImage } = useContext(LocalTunesContext);
 
+    let { id } = useParams();
+    console.log(id);
+
+    useEffect (() => {
+        setPlaylistTitle("Solid Jazz")
+        setPlaylistImage("https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1")
+    },);
 
 const handleTrash = () => {
     let result = window.confirm("Want to delete?");

@@ -6,5 +6,5 @@ export const DISCOVER = '/discover';
 
 export const COLLECTION = '/collection';
 export const PLAYLIST = '/collection/playlist/:id';
-export const ARTISTS = '/collection/artists';
+export const ARTIST = '/collection/artist/:id';
 export const SONGS = '/collection/songs';
