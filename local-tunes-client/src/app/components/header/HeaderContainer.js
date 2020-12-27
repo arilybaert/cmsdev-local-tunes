@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 
-import { HomeContent, SearchContent, CollectionContent} from '../header'
+import { HomeContent, SearchContent, CollectionContent, PlaylistContent} from '../header'
 import * as Routes from '../../routes';
 
 
@@ -18,6 +18,7 @@ const HeaderContainer = () => {
             {header && header === Routes.HOME ? <HomeContent/> : ''}
             {header && header === Routes.DISCOVER ? <SearchContent/> : ''}
             {header && header === Routes.COLLECTION ? <CollectionContent/> : ''}
+            {header && header.includes("playlist") ? <PlaylistContent/> : ''}
         </div>
     )
 }

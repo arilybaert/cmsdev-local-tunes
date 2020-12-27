@@ -3,6 +3,8 @@ import HeaderContainer from './HeaderContainer';
 import HomeContent from './HomeContent';
 import SearchContent from './SearchContent';
 import CollectionContent from './CollectionContent';
+import PlaylistContent from './PlaylistContent';
+
 
 
 export {
@@ -10,5 +12,6 @@ export {
     Header,
     HomeContent,
     HeaderContainer,
-    SearchContent
+    SearchContent,
+    PlaylistContent
 } 

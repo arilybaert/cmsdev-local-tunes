@@ -8,7 +8,8 @@ import {
     Home,
     Login,
     Register,
-    Discover
+    Discover,
+    Playlist
 } from './pages';
 import './styles/App.scss';
 
@@ -28,7 +29,9 @@ function App () {
                         
                         <Route exact path={Routes.HOME} component={Home}/>
                         <Route exact path={Routes.DISCOVER} component={Discover}/>
-                        <Route path={Routes.COLLECTION} component={Collection}/>
+                        <Route exact path={Routes.COLLECTION} component={Collection}/>
+
+                        <Route exact path={Routes.PLAYLIST} component={Playlist}/>
                     </Switch>
                 </Router>
 
