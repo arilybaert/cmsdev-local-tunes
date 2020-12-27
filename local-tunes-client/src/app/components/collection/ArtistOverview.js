@@ -10,6 +10,7 @@ const ArtistOverview = () => {
             console.log("artist playlist");
         }
     }
+
     return (
         <div className="row o-collectionArtistOverview">
 

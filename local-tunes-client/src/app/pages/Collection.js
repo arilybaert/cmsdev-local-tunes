@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Player, HeaderContainer, PlaylistOverview, LocalTunesContext, ArtistOverview} from '../components';
+import {Player, HeaderContainer, PlaylistOverview, LocalTunesContext, ArtistOverview, SongOverview} from '../components';
 
 const Collection = () => {
     const { collectionHeader, setCollectionHeader} = useContext(LocalTunesContext);
@@ -9,6 +9,7 @@ const Collection = () => {
             <HeaderContainer/>
             {collectionHeader && collectionHeader === "playlists"? <PlaylistOverview/> : ''}
             {collectionHeader && collectionHeader === "artists"? <ArtistOverview/> : ''}
+            {collectionHeader && collectionHeader === "songs"? <SongOverview/> : ''}
             <Player/>
         </div>
     )

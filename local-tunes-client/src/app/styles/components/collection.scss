@@ -27,6 +27,11 @@
         
     }
 }
+
+/*
+    Artist
+*/
+
 .o-collectionArtistOverview {
     padding-top: 1rem;
     padding-bottom: 9rem;
@@ -56,5 +61,105 @@
             }
         }
         
+    }
+}
+/*
+    Song
+*/
+
+.o-collectionSongOverview {
+    padding-top: 1rem;
+    padding-bottom: 9rem;
+
+    .m-songOveriew {
+
+        margin: 0.4rem 0;
+        color: $white-color;
+        .a-songOverviewImage {
+            width: 5vh;
+            height: 5vh;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .m-songOveriewTitle {
+            display: flex;
+            align-items: flex-start;
+            justify-content: centers;
+            flex-direction: column;
+
+            .a-songOveriewTitle {
+                font-size: 11pt;
+                font-weight: 550;
+            }
+
+            .a-songOveriewArtist {
+                font-size: 8pt;
+                font-weight: 400;
+            }
+        }
+        .m-songOverviewButton {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .a-songOverviewButton {
+                font-size: 15pt;
+                color: $accent-color;
+            }
+            .a-songOverviewButtonAlt {
+                font-size: 15pt;
+                color: $white-color;
+            }
+        }
+        
+    }
+
+    // song popup
+
+    .o-songPopup {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(76, 76, 76, 0.909);
+        border-radius: 13px 13px 0 0;
+        z-index: 1000;
+
+        .m-songPopup {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
+            .a-songPopupImage {
+                margin-top: 2rem;
+                width: 33vw;
+                height: 33vw;
+                border-radius: 7px;
+            }
+            .a-songPopupTitle {
+                margin: 0.7rem 0;
+                font-size: 13pt;
+                font-weight: 700;
+            }
+            .a-songPopupArtist {
+                font-size: 13pt;
+            }
+        }
+        .m-songPopupAction {
+            margin-top: 2.4rem;
+
+        }
+        .a-songPopupAction {
+            padding-left: 1rem;
+            font-size: 15pt;
+            font-weight: 200;
+        }
+        .a-songPopupClose {
+            margin-top: 3rem;
+
+            font-size: 15pt;
+            font-weight: 700;
+            text-align: center;
+        }
     }
 }
