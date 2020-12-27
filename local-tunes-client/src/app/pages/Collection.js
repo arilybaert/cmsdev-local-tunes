@@ -2,7 +2,8 @@ import React, {useContext} from 'react';
 import {Player, HeaderContainer, PlaylistOverview, LocalTunesContext, ArtistOverview, SongOverview} from '../components';
 
 const Collection = () => {
-    const { collectionHeader, setCollectionHeader} = useContext(LocalTunesContext);
+
+    const { collectionHeader} = useContext(LocalTunesContext);
 
     return (
         <div>

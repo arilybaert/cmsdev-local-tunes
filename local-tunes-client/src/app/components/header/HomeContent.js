@@ -5,6 +5,12 @@ import { faCog, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 const HomeContent = () => {
 
+    const handleDistance = (event) => {
+        console.log(event.target.value);
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    }
     return (
             <div className="row o-homeHeader">
                 <div className="col-4"></div>
@@ -18,10 +24,10 @@ const HomeContent = () => {
                 <div className="col-4 m-settings">
                     <FontAwesomeIcon icon={faCog} className="a-settingsLogo"/>
                 </div>
-                <div className="col-12 m-slider">
-                <input type="range" min="1" max="100" value="50" className="a-slider" id="myRange"></input>    
+                <form className="col-12 m-slider" onSubmit={handleSubmit}>
+                <input type="range" min="1" max="100" value="50" className="a-slider" id="myRange" onChange={handleDistance}></input>    
                 <span id="demo"></span>
-                </div>
+                </form>
             </div>
     )
 }
