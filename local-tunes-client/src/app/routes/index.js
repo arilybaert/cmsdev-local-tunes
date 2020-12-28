@@ -8,6 +8,8 @@ export const GENRE = '/discover/genre/:genre';
 
 export const COLLECTION = '/collection';
 export const PLAYLIST = '/collection/playlist/:id';
+export const CREATEPLAYLIST = '/collection/create';
+
 export const ARTIST = '/collection/artist/:id';
 export const SONGS = '/collection/songs';
 

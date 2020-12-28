@@ -4,6 +4,8 @@ import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import * as Routes from '../../routes';
+
 const PlaylistOverview = () => {
 
     const handleTrash = () => {
@@ -18,7 +20,7 @@ const PlaylistOverview = () => {
 
                 {/* create playlist */}
 
-                <div className="row m-playlistOveriew">
+                <Link to={Routes.CREATEPLAYLIST} className="row m-playlistOveriew">
                     <div className="col-3">
                         <img src="album-placeholder.jpg" alt="cover-art" title="cover-art" className="a-PlaylistOverviewImage"></img>
                     </div>
@@ -28,7 +30,7 @@ const PlaylistOverview = () => {
                     <div className="col-3 m-listOverviewButton" >
                         {/* <FontAwesomeIcon icon={faTrash} className="a-listOverviewButton" id="discover"/> */}
                     </div>
-                </div>
+                </Link>
 
                 {/* user playlists */}
 

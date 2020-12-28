@@ -14,7 +14,8 @@ import {
     Genre,
     Settings,
     Upload,
-    ChangePassword
+    ChangePassword,
+    CreatePlaylist
 } from './pages';
 import './styles/App.scss';
 
@@ -37,6 +38,8 @@ function App () {
                         <Route exact path={Routes.COLLECTION} component={Collection}/>
 
                         <Route exact path={Routes.PLAYLIST} component={Playlist}/>
+                        <Route exact path={Routes.CREATEPLAYLIST} component={CreatePlaylist}/>
+
                         <Route exact path={Routes.ARTIST} component={Artist}/>
                         <Route exact path={Routes.GENRE} component={Genre}/>
 

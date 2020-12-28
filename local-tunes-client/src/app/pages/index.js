@@ -9,6 +9,7 @@ import Genre from './Genre';
 import Settings from './Settings';
 import Upload from './Upload';
 import ChangePassword from './ChangePassword';
+import CreatePlaylist from './CreatePlaylist';
 
 export {
     Collection,
@@ -21,5 +22,6 @@ export {
     Genre,
     Settings,
     Upload,
-    ChangePassword
+    ChangePassword,
+    CreatePlaylist
 };
