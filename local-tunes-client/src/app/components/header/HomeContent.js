@@ -1,7 +1,10 @@
-import React from 'react'; 
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
+import * as Routes from '../../routes';
 
 const HomeContent = () => {
 
@@ -21,11 +24,11 @@ const HomeContent = () => {
                     </span>
                     <span className="a-locationCurrent">Brussels</span>
                 </div>
-                <div className="col-4 m-settings">
+                <Link to={Routes.SETTINGS} className="col-4 m-settings">
                     <FontAwesomeIcon icon={faCog} className="a-settingsLogo"/>
-                </div>
+                </Link>
                 <form className="col-12 m-slider" onSubmit={handleSubmit}>
-                <input type="range" min="1" max="100" value="50" className="a-slider" id="myRange" onChange={handleDistance}></input>    
+                    <input type="range" min="1" max="100" value="50" className="a-slider" id="myRange" onChange={handleDistance}></input>    
                 <span id="demo"></span>
                 </form>
             </div>

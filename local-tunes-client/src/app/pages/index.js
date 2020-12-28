@@ -6,6 +6,7 @@ import Discover from './Discover';
 import Playlist from './Playlist';
 import Artist from './Artist';
 import Genre from './Genre';
+import Settings from './Settings';
 
 export {
     Collection,
@@ -15,5 +16,6 @@ export {
     Discover,
     Playlist,
     Artist,
-    Genre
+    Genre,
+    Settings
 };

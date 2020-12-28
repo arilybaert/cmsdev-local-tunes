@@ -6,6 +6,7 @@ import CollectionContent from './CollectionContent';
 import PlaylistContent from './PlaylistContent';
 import ArtistContent from './ArtistContent';
 import GenreContent from './GenreContent';
+import SettingsContent from './SettingsContent';
 
 
 
@@ -17,5 +18,6 @@ export {
     SearchContent,
     PlaylistContent,
     ArtistContent,
-    GenreContent
+    GenreContent,
+    SettingsContent
 } 

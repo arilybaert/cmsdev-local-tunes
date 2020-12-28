@@ -11,7 +11,8 @@ import {
     Discover,
     Playlist,
     Artist,
-    Genre
+    Genre,
+    Settings
 } from './pages';
 import './styles/App.scss';
 
@@ -36,6 +37,8 @@ function App () {
                         <Route exact path={Routes.PLAYLIST} component={Playlist}/>
                         <Route exact path={Routes.ARTIST} component={Artist}/>
                         <Route exact path={Routes.GENRE} component={Genre}/>
+
+                        <Route exact path={Routes.SETTINGS} component={Settings}/>
                     </Switch>
                 </Router>
 

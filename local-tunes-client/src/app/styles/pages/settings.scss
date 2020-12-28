@@ -1,0 +1,21 @@
+.o-settings {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    flex-direction: column;
+    color: $white-color;
+
+    .m-settings {
+        margin-top: 0.2rem;
+        text-align: center;
+
+    }
+    .a-settingItem {
+        font-size: 16pt;
+    }
+}
+.a-settingsHeader {
+    color: $accent-color;
+    font-size: 18pt;
+    font-weight: 700;
+}
