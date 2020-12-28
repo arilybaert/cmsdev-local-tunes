@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { LocalTunesContext } from '../context';
 
 const SearchContent = () => {
-
+    const { setSearchTerm } = useContext(LocalTunesContext);
     const handleSearch = (event) => {
-        console.log(event.target.value);
+        setSearchTerm(event.target.value);
     }
     const handleSubmit = (event) => {
         event.preventDefault();

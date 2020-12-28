@@ -5,6 +5,7 @@ import SearchContent from './SearchContent';
 import CollectionContent from './CollectionContent';
 import PlaylistContent from './PlaylistContent';
 import ArtistContent from './ArtistContent';
+import GenreContent from './GenreContent';
 
 
 
@@ -15,5 +16,6 @@ export {
     HeaderContainer,
     SearchContent,
     PlaylistContent,
-    ArtistContent
+    ArtistContent,
+    GenreContent
 } 

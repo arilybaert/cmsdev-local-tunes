@@ -5,6 +5,7 @@ import Register from './Register';
 import Discover from './Discover';
 import Playlist from './Playlist';
 import Artist from './Artist';
+import Genre from './Genre';
 
 export {
     Collection,
@@ -13,5 +14,6 @@ export {
     Register,
     Discover,
     Playlist,
-    Artist
+    Artist,
+    Genre
 };

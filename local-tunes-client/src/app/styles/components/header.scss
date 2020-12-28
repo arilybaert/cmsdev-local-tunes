@@ -10,6 +10,9 @@
         justify-content: center;
         font-size: 13pt;
         font-weight: 400;
+        .a-subtitleGenre {
+            font-weight: 600;
+        }
     }
 
     .m-headerTop {
@@ -18,6 +21,11 @@
 
         .a-headerAccent {
             color: $accent-color;
+        }
+        .a-headerGenreAccent {
+            color: $accent-color;
+
+            font-weight: 670;
         }
     }
     .a-activeHeader {

@@ -73,4 +73,51 @@ $search-color-7: #FAED8B;
 
 
 
+.o-searchResults {
+    color: white;
 
+    .m-resultsTitle {
+        margin: 1rem 0;
+        font-size: 14pt;
+        font-weight: 500;
+    }
+
+    .o-songResult {
+        margin-bottom: 0.4rem;
+        .a-searchResultSongImg {
+            height: 11vw;
+            width: 11vw;
+        }
+        .m-resultSongInfo {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            .a-resultSongTitle {
+                font-weight: 590;
+                font-size: 12pt;
+            }
+            .a-resultSongArtist {
+                font-weight: 5200;
+                font-size: 9.5pt;
+            }
+        }
+    }
+
+    .a-searchResultArtist {
+        height: 11vw;
+        width: 11vw;
+        border-radius: 50%;
+    }
+
+    .m-searchresultIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .a-DiscoverHeart {
+        color: $white-color;
+
+    }
+
+}

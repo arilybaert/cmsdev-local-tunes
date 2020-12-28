@@ -3,6 +3,7 @@ export const REGISTER = '/register';
 export const HOME = '/home';
 export const HOMESHORT = '/';
 export const DISCOVER = '/discover';
+export const GENRE = '/discover/genre/:genre';
 
 export const COLLECTION = '/collection';
 export const PLAYLIST = '/collection/playlist/:id';
