@@ -12,4 +12,5 @@ export const ARTIST = '/collection/artist/:id';
 export const SONGS = '/collection/songs';
 
 export const SETTINGS = '/settings';
+export const UPLOAD = '/upload';
 

@@ -1,6 +1,7 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {HeaderContainer, Player} from '../components';
-
+import * as Routes from '../routes';
 
 const Settings = () => {
 
@@ -11,9 +12,9 @@ const Settings = () => {
 
             <div className="o-settings">
                 <div className="row m-settings">
-                    <div className="col-12">
+                    <Link to={Routes.UPLOAD} className="col-12">
                         <span className="a-settingItem">Upload</span>
-                    </div>
+                    </Link>
                 </div>
                 
                 <div className="row m-settings">

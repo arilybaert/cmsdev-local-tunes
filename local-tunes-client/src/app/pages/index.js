@@ -7,6 +7,7 @@ import Playlist from './Playlist';
 import Artist from './Artist';
 import Genre from './Genre';
 import Settings from './Settings';
+import Upload from './Upload';
 
 export {
     Collection,
@@ -17,5 +18,6 @@ export {
     Playlist,
     Artist,
     Genre,
-    Settings
+    Settings,
+    Upload
 };
