@@ -1,14 +1,14 @@
 import React from 'react';
 
-const SettingsContent = () => {
+const ChangePasswordContent= () => {
 
     return (
         <div className="row o-homeHeader">
                 <div className="col-12 m-playlistDetailCover a-settingsHeader">
-                    Settings
+                    Change password
                 </div>
         </div>
-    );
-};
+    )
+}
 
-export default SettingsContent;
+export default ChangePasswordContent;

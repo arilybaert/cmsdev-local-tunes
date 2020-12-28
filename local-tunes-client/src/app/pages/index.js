@@ -8,6 +8,7 @@ import Artist from './Artist';
 import Genre from './Genre';
 import Settings from './Settings';
 import Upload from './Upload';
+import ChangePassword from './ChangePassword';
 
 export {
     Collection,
@@ -19,5 +20,6 @@ export {
     Artist,
     Genre,
     Settings,
-    Upload
+    Upload,
+    ChangePassword
 };

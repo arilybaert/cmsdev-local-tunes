@@ -13,4 +13,5 @@ export const SONGS = '/collection/songs';
 
 export const SETTINGS = '/settings';
 export const UPLOAD = '/upload';
+export const CHANGEPASS = '/change-password';
 

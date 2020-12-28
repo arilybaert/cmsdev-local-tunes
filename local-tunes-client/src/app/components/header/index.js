@@ -8,6 +8,7 @@ import ArtistContent from './ArtistContent';
 import GenreContent from './GenreContent';
 import SettingsContent from './SettingsContent';
 import UploadContent from './UploadContent';
+import ChangePasswordContent from './ChangePasswordContent';
 
 
 
@@ -21,5 +22,6 @@ export {
     ArtistContent,
     GenreContent,
     SettingsContent,
-    UploadContent
+    UploadContent,
+    ChangePasswordContent
 } 

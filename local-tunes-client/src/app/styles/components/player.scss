@@ -38,3 +38,54 @@
         }
     }
 }
+
+.o-playerMax {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+
+    color: $white-color;
+    background-color: rgba(93, 89, 89, 0.54);
+    backdrop-filter: blur(40px);
+    // border-radius: 15px 15px 0 0 ;
+
+    .o-closeBtn {
+        margin-top: 2rem;
+        .a-closeBtn {
+            font-size: 19pt;
+        }
+    }
+
+    .o-coverImg {
+        height: 57vh;
+        .m-coverImg {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            .a-playerImg {
+                height: 85vw;
+                width: 85vw;
+                border-radius: 9px;
+            }
+        }
+    }
+    .m-songInfo {
+        margin-top: 0.4rem;
+        margin-left: 7vw;
+        justify-content: center;
+    }
+    .m-playLogo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .o-playButtons {
+        margin-top: 2rem;
+        .a-playLogo {
+            font-size: 19pt;
+        }
+    }
+
+}

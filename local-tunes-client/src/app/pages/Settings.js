@@ -17,11 +17,11 @@ const Settings = () => {
                     </Link>
                 </div>
                 
-                <div className="row m-settings">
+                <Link to={Routes.CHANGEPASS} className="row m-settings">
                     <div className="col-12">
                         <span className="a-settingItem">Change password</span>
                     </div>
-                </div>
+                </Link>
 
                 <div className="row m-settings">
                     <div className="col-12">
