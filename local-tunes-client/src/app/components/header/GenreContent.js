@@ -1,9 +1,9 @@
-import React , {useContext, useEffect} from 'react';
+import React , {useContext} from 'react';
 
 import {LocalTunesContext } from '../../components';
 
 const GenreContent = () => {
-    const { genreTitle, discoverState, setDiscoverState} = useContext(LocalTunesContext);
+    const { genreTitle, setDiscoverState} = useContext(LocalTunesContext);
 
     const handleGenreClick = (state) => {
         setDiscoverState(state);

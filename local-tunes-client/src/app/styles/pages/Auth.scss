@@ -31,3 +31,18 @@
         height: 30px;
     }
 }
+
+.o-error {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: $white-color;
+    font-weight: 700;
+    text-align: center;
+}
