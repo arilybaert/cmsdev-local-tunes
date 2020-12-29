@@ -1,10 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import {HeaderContainer, Player} from '../components';
 import * as Routes from '../routes';
 
 const Settings = () => {
+    const history = useHistory();
 
+    const handleLogout = () => {
+        localStorage.setItem( 'login', '' );
+
+        history.push(Routes.LOGIN);
+        window.location.reload();
+    }
     return (
         <div>
             <HeaderContainer/>
@@ -23,7 +30,7 @@ const Settings = () => {
                     </div>
                 </Link>
 
-                <div className="row m-settings">
+                <div className="row m-settings" onClick={handleLogout}>
                     <div className="col-12">
                         <span className="a-settingItem">Logout</span>
                     </div>

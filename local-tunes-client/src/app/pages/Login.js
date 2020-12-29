@@ -48,15 +48,17 @@ const Login = () => {
             config)
         .then(function (response) {
             if ( response.status === 200 ) {
-                console.log(response.data.token);
                 const data = response.data;
                 localStorage.setItem( 'login', data.token );
+
                 history.push(Routes.HOME);
+                window.location.reload();
 
                 // _this.props.setLogin( data.token );
             }
         })
         .catch((error) => {
+            // strip htlm tags for client friendly error
             function strip_html_tags(str) {
                 if ((str===null) || (str===''))
                     return false;
@@ -66,7 +68,6 @@ const Login = () => {
             }
             setError(true);
             setErrorMsg(strip_html_tags( error.response.data.message ));
-            // alert( strip_html_tags( error.response.data.message ) );
         });
     }
 
