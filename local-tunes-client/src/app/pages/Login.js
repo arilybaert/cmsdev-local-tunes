@@ -57,6 +57,7 @@ const Login = () => {
                 // _this.props.setLogin( data.token );
             }
         })
+
         .catch((error) => {
             // strip htlm tags for client friendly error
             function strip_html_tags(str) {
@@ -85,8 +86,8 @@ const Login = () => {
                     <label htmlFor="username" className="a-authTextLabel">Username</label>
                     <input type="text" name="username" className="a-authTextInput" value={form.username} onChange={handleChange}></input>
                     <label htmlFor="password" className="a-authTextLabel">Password</label>
-                    <input type="password" name="password" className="a-authTextInput" onChange={handleChange}></input>
-                    <button type="submit" className="a-authButton" value={form.password} onClick={handleSubmit}>Login</button>
+                    <input type="password" name="password" className="a-authTextInput" value={form.password} onChange={handleChange}></input>
+                    <button type="submit" className="a-authButton"  onClick={handleSubmit}>Login</button>
                 </form>
             </div>
         </div>

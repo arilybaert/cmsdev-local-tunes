@@ -1,35 +1,87 @@
 import React from 'react';
 import {HeaderContainer} from '../components';
+import axios from 'axios';
 
 const Upload = () => {
 
+    // const [form, setForm] = useState({
+    //     artist: "",
+    //     name: "",
+    //     album: "",
+    // });
+    // const handleChange = (event) => {
+    //     const value = event.target.value;
+    //     setForm({
+    //       ...form,
+    //       [event.target.name]: value
+    //     });
+    // }
+    const apiUrl = 'http://www.local-tunes-server.test/wp-json/wp/v2/media';
+
+    const config = {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 
+            Authorization: `Bearer ${localStorage.getItem('login')}`,
+            'X-WP-Nonce': 'wpApiSettings.nonce'
+
+
+        },
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const musicfile = document.getElementById("a-music");
+        const formData = new FormData();
+        formData.append("file", musicfile.files[0]);
+        console.log(config);
+
+        axios.post(
+            apiUrl,
+            config,
+            formData
+        ).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log(err.response.data.message);
+        })
+
+    }
+
+
+
+    // const handleChange = (event) => {
+    //     const value = event.target.value;
+    //     setForm({
+    //       ...form,
+    //       [event.target.name]: value
+    //     });
+    // }
     return (
         <div>
             <HeaderContainer/>
 
-        <form>
             <div className="row">
                 <div className="col-12 o-form">
 
                     <form className="m-form">
-                        <label for="musicfile" className="a-authTextLabel">Music file</label>
-                        <input type="text" name="musicfile" className="a-authTextInput"></input>
-                        <label for="coverart" className="a-authTextLabel">Cover-art</label>
+                        <label htmlFor="musicfile" className="a-authTextLabel">Music file</label>
+                        <input type="file" name="musicfile" className="a-authTextInput" id="a-music"></input>
+                        <label htmlFor="coverart" className="a-authTextLabel">Cover-art</label>
                         <input type="text" name="coverart" className="a-authTextInput"></input>
-                        <label for="name" className="a-authTextLabel">Name</label>
-                        <input type="text" name="name" className="a-authTextInput"></input>
-                        <label for="artist" className="a-authTextLabel">Artist</label>
-                        <input type="text" name="artist" className="a-authTextInput"></input>
-                        <label for="album" className="a-authTextLabel">Album</label>
+                        <label htmlFor="name" className="a-authTextLabel">Name</label>
+                        <input type="text" name="name" className="a-authTextInput" ></input>
+                        <label htmlFor="artist" className="a-authTextLabel">Artist</label>
+                        <input type="text" name="artist" className="a-authTextInput" ></input>
+                        <label htmlFor="album" className="a-authTextLabel">Album</label>
                         <input type="text" name="album" className="a-authTextInput"></input>
 
-                        <button type="submit" className="a-authButton">Upload</button>
+                        <button type="submit" className="a-authButton" onClick={handleSubmit}>Upload</button>
 
                     </form>
                 </div>
             </div>
 
-        </form>
         </div>
     );
 };
