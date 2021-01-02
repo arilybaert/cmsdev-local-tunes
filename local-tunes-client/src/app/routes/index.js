@@ -12,6 +12,7 @@ export const CREATEPLAYLIST = '/collection/create';
 
 export const ARTIST = '/collection/artist/:id';
 export const SONGS = '/collection/songs';
+export const ALBUM = '/album/:id';
 
 export const SETTINGS = '/settings';
 export const UPLOAD = '/upload';

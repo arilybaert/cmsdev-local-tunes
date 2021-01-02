@@ -5,6 +5,7 @@ import Register from './Register';
 import Discover from './Discover';
 import Playlist from './Playlist';
 import Artist from './Artist';
+import Album from './Album';
 import Genre from './Genre';
 import Settings from './Settings';
 import Upload from './Upload';
@@ -23,5 +24,6 @@ export {
     Settings,
     Upload,
     ChangePassword,
-    CreatePlaylist
+    CreatePlaylist,
+    Album
 };

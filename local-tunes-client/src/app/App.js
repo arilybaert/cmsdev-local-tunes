@@ -15,7 +15,8 @@ import {
     Settings,
     Upload,
     ChangePassword,
-    CreatePlaylist
+    CreatePlaylist,
+    Album
 } from './pages';
 import './styles/App.scss';
 
@@ -59,6 +60,7 @@ function App () {
 
                         <Route exact path={Routes.ARTIST} component={Artist}/>
                         <Route exact path={Routes.GENRE} component={Genre}/>
+                        <Route exact path={Routes.ALBUM} component={Album}/>
 
                         <Route exact path={Routes.SETTINGS} component={Settings}/>
                         <Route exact path={Routes.UPLOAD} component={Upload}/>

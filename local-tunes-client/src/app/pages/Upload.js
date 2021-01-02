@@ -16,15 +16,13 @@ const Upload = () => {
     //       [event.target.name]: value
     //     });
     // }
-    const apiUrl = 'http://www.local-tunes-server.test/wp-json/wp/v2/media';
+    const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/posts`;
 
     const config = {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: { 
-            Authorization: `Bearer ${localStorage.getItem('login')}`,
-            'X-WP-Nonce': 'wpApiSettings.nonce'
-
+            'Authorization': `Bearer ${localStorage.getItem('login')}`,
 
         },
     };
@@ -35,6 +33,7 @@ const Upload = () => {
         const formData = new FormData();
         formData.append("file", musicfile.files[0]);
         console.log(config);
+        console.log(formData);
 
         axios.post(
             apiUrl,
