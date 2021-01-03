@@ -4,9 +4,10 @@
  * This file is required in the root directory so WordPress can find it.
  * WP is hardcoded to look in its own directory or one directory up for wp-config.php.
  */
+// define('JWT_AUTH_SECRET_KEY', $_ENV["JWT_AUTH_SECRET_KEY"]);
+define('JWT_AUTH_SECRET_KEY', "Vd9qWVP<M1 -N+#0U]By3wor#>2mJae|JE)ofqL48p-@K.k3c5hQ#ld`jf$0D-ng");
+define('JWT_AUTH_CORS_ENABLE', true);
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 require_once dirname(__DIR__) . '/config/application.php';
 require_once ABSPATH . 'wp-settings.php';
 
-define('JWT_AUTH_SECRET_KEY', $_ENV["JWT_AUTH_SECRET_KEY"]);
-define('JWT_AUTH_CORS_ENABLE', true);

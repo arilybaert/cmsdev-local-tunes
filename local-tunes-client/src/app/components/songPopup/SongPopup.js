@@ -1,7 +1,7 @@
 import React, {  useContext } from 'react';
 
 import { LocalTunesContext } from '../../components';
-const SongPopup = () => {
+const SongPopup = ({title, artist, img}) => {
     const { popupState, setPopupState} = useContext(LocalTunesContext);
 
     const handleMenu = () => {
@@ -10,9 +10,9 @@ const SongPopup = () => {
     return (
         <div className="o-songPopup">
                 <div className="col-12 m-songPopup">
-                    <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songPopupImage"></img>
-                    <span className="a-songPopupTitle">Hazy Jane</span>
-                    <span className="a-songPopupArtist">Nick Drake</span>
+                    <img src={img} alt="cover-art" title="cover-art" className="a-songPopupImage"></img>
+                    <span className="a-songPopupTitle">{title}</span>
+                    <span className="a-songPopupArtist">{artist}</span>
                 </div>
                 <div className="col-12 m-songPopupAction">
                     <span className="a-songPopupAction">Add to a playlist</span>

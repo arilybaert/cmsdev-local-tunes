@@ -41,7 +41,12 @@
     "roots/wp-password-bcrypt": "1.0.0",
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",
     "wpackagist-plugin/rest-api": "^2.0@beta",
-    "wpackagist-plugin/wp-rest-user": "^1.4"
+    "wpackagist-plugin/wp-rest-user": "^1.4",
+    "wpackagist-plugin/user-role-editor": "^4.57",
+    "wpackagist-plugin/better-rest-api-featured-images": "^1.2",
+    "wpackagist-plugin/custom-post-type-ui": "^1.8",
+    "wpackagist-plugin/acf-to-rest-api": "^3.3",
+    "wpackagist-plugin/advanced-custom-fields": "^5.9"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5.8",
