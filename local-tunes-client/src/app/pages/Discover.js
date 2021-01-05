@@ -50,6 +50,7 @@ const Discover = () => {
 
     useEffect (() => {
         fetchGenres();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
 
