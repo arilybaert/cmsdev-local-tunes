@@ -5,10 +5,25 @@ import axios from 'axios';
 const Upload = () => {
 
     const [form, setForm] = useState({
-        title: "",
+        artist: "",
+        album: "",
+        songs: ""
     });
-    const [ uploadedSongs, setUploadedSongs ] = useState([]);
+    const [ songIDs, setSongIDs ] = useState([]);
+    const [ imgID, setImgID ] = useState([]);
 
+    /*
+    API information
+    */
+    const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media/`;
+    const apiUrlAlbum = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums/`;
+    const config = {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 
+            'Authorization': `Bearer ${localStorage.getItem('login')}`,
+        },
+    };
     const handleChange = (event) => {
         const value = event.target.value;
         setForm({
@@ -16,46 +31,73 @@ const Upload = () => {
           [event.target.name]: value
         });
     }
-    const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media/`;
+    const uploadAlbumInformation = async () => {
+        const data = {
+            "fields": {
+                "title": form.album,
+                "artist": form.artist,
+                "songs": songIDs,
+                "image": imgID
+            }
+        };
+        console.log(data);
+        await axios.post(
+            apiUrlAlbum,
+            data,
+            config
+        ).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log(err.response.data.message);
+        })
+    }
+    const uploadImg = async (image) => {
+        const imgData = new FormData();
+        imgData.set("file", image.files[0]);
+        await axios.post(
+            apiUrl,
+            imgData,
+            config
+        ).then((res) => {
+            setImgID(imgID.push(res.data.id));
+            console.log(`image ${imgID}`);
 
-    const config = {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 
-            'Authorization': `Bearer ${localStorage.getItem('login')}`,
-            // 'Content-Type': 'multipart/form-data',
-            // 'Accept': '*/*',
-        },
-    };
+            uploadAlbumInformation(); // sorry for the ghetto solution 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const musicfile = document.getElementById("a-music");
-
-
-        Array.from(musicfile.files).forEach((f) => { 
+        }).catch((err) => {
+            console.log(err.response.data.message);
+        })
+    }
+    const uploadsongs = (songs) => {        // Loop throug songs and upload them one by one
+        Array.from(songs.files).forEach( async (f) => { 
             const formData = new FormData();
-
-            // console.log(f.data.data.id);
             formData.set("file", f);
 
-            axios.post(
+            await axios.post(
                 apiUrl,
                 formData,
                 config
             ).then((res) => {
-                setUploadedSongs(uploadedSongs.push(res.data.id));
-                console.log(uploadedSongs);
+                setSongIDs(songIDs.push(res.data.id));
+                console.log(songIDs);
+                const coverart = document.getElementById("a-cover-art"); // find selected cover art
+                uploadImg(coverart);  // sorry for the ghetto solution 
+
             }).catch((err) => {
                 console.log(err.response.data.message);
             })
         });
+    }
 
 
 
-        
-        // console.log(musicfile.files);
-        // formData.append("title", form.title);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const musicfile = document.getElementById("a-music");       // find selected songs
+
+        uploadsongs(musicfile);
+
 
        /*
         @TODO upload form in one movement
@@ -64,19 +106,8 @@ const Upload = () => {
         const formData = new FormData(uploadForm);
         */
 
-
-
     }
 
-
-
-    // const handleChange = (event) => {
-    //     const value = event.target.value;
-    //     setForm({
-    //       ...form,
-    //       [event.target.name]: value
-    //     });
-    // }
     return (
         <div>
             <HeaderContainer/>
@@ -87,26 +118,25 @@ const Upload = () => {
                     <form className="m-form">
                         <label htmlFor="musicfile" className="a-authTextLabel">Music file</label>
                         <input type="file" name="musicfile" className="a-authTextInput" id="a-music" multiple></input>
- 
-                        {/* <label htmlFor="title" className="a-authTextLabel" id="a-title">Title</label>
-                        <input type="text" name="title" className="a-authTextInput" onChange={handleChange}></input> */}
+
+                        {/* <button type="submit" className="a-authButton" onClick={handleSubmit}>Upload</button> */}
+
+                    {/* </form> */}
+
+                    {/* <form className="m-form"> */}
+                        <label htmlFor="coverart" className="a-authTextLabel">Cover-art</label>
+                        <input type="file" name="coverart" className="a-authTextInput" id="a-cover-art"></input>
+                    {/* </form> */}
+
+                    {/* <form className="m-form"> */}
+                    <label htmlFor="artist" className="a-authTextLabel">Artist</label>
+                        <input type="text" name="artist" className="a-authTextInput" onChange={handleChange} value={form.artist} ></input>
+                        <label htmlFor="album" className="a-authTextLabel">Album</label>
+                        <input type="text" name="album" className="a-authTextInput" value={form.album} onChange={handleChange}></input>
+                        <input type="hidden" name="cover-art"></input>
+                        <input type="hidden" value={songIDs} name="songs"></input>
 
                         <button type="submit" className="a-authButton" onClick={handleSubmit}>Upload</button>
-
-                    </form>
-
-                    <form className="m-form">
-                        <label htmlFor="coverart" className="a-authTextLabel">Cover-art</label>
-                        <input type="file" name="coverart" className="a-authTextInput"></input>
-                    </form>
-
-                    <form className="m-form">
-                    <label htmlFor="artist" className="a-authTextLabel">Artist</label>
-                        <input type="text" name="artist" className="a-authTextInput" ></input>
-                        <label htmlFor="album" className="a-authTextLabel">Album</label>
-                        <input type="text" name="album" className="a-authTextInput"></input>
-                        <input type="hidden" name="cover-art"></input>
-                        <input type="hidden" name="songs"></input>
                     </form>
                 </div>
             </div>
