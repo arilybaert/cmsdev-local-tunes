@@ -22,6 +22,7 @@ const Home = () => {
 
     const apiUrlRecentAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?order=desc&per_page=6`;
     const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?filter[orderby]=likes&order=desc`;
+    // const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media/filter[orderby]=likes&order=desc`;
 
     const config = {
         method: 'GET',
@@ -36,8 +37,9 @@ const Home = () => {
             apiUrlRecentAlbums,
             config,
         ).then((res) => {
-            // console.log(res.data)
+            console.log(res.data);
             setRecentAlbums(res.data);
+            axios.get()
         }).catch((err) => {
             console.log(err.response.data.message);
         });
@@ -70,7 +72,7 @@ const Home = () => {
                 { recentAlbums && recentAlbums.map((data, index) => 
                     <Link to={`/album/${data.id}`} className="col-4 o-releaseCard" key={index}>
                         <div className="m-releaseCard">
-                            <img src="https://i.redd.it/aayfot0hjwn21.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
+                            <img src={data.acf.image.guid} alt="cover-art" title="cover-art" className="a-cardImg"></img>
                             <span className="a-albumTitleHome">{data.acf.title}</span>
                             <span className="a-albumArtistHome">{data.acf.artist}</span>
                         </div>

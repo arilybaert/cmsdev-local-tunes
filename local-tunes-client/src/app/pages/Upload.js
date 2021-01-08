@@ -33,12 +33,14 @@ const Upload = () => {
     }
     const uploadAlbumInformation = async () => {
         const data = {
+            "title": form.album,
             "fields": {
                 "title": form.album,
                 "artist": form.artist,
                 "songs": songIDs,
                 "image": imgID
-            }
+            },
+            "status": "publish"
         };
         console.log(data);
         await axios.post(
@@ -47,6 +49,7 @@ const Upload = () => {
             config
         ).then((res) => {
             console.log(res);
+            window.alert(res.statusText) // todo
         }).catch((err) => {
             console.log(err.response.data.message);
         })
@@ -111,6 +114,7 @@ const Upload = () => {
     return (
         <div>
             <HeaderContainer/>
+
 
             <div className="row">
                 <div className="col-12 o-form">
