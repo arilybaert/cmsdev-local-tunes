@@ -13,10 +13,15 @@ const Playlist = () => {
     const { popupState, setPopupState} = useContext(LocalTunesContext);
     const { setAlbumTitle, setAlbumImage, setArtistTitle, artistTitle, albumImage } = useContext(LocalTunesContext);
     const [ songs, setSongs ] = useState();
+    const [ likedSongs, setLikedSongs ] = useState([]);
+    const [ likedSongsID, setLikedSongsID ] = useState();
+    // eslint-disable-next-line no-unused-vars
+    const [ userID, setUserID ] = useState();
+
     let { id } = useParams();
 
     const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums/${id}`;
-    const apiUserSongUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums/${id}`;
+    const apiUserSongUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs/${likedSongsID}`;
     const apiUserID = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
 
     const config = {
@@ -27,7 +32,8 @@ const Playlist = () => {
         },
     };
 
-    const fetchUserSongs = () => {
+    const fetchUserSongs = async () => {
+        // Get current user
         const conf = {
             method: 'GET',
             mode: 'cors',
@@ -37,25 +43,46 @@ const Playlist = () => {
                 'Authorization': `Bearer ${localStorage.getItem('login')}`,
             },
         }
-        axios.get(
+
+        await axios.get(
             apiUserID,
             conf,
-        ).then((res) => {
-            console.log(res.data.id);
+        ).then(async(res) => {
+            setUserID(res.data.id)
+
+            await axios.get(
+                `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=${res.data.id}`, // tried this with setUserID but it updates to late. So the result below gives me undefined
+                conf,
+            ).then((res) => {
+                setLikedSongs([]);
+                setLikedSongsID(res.data[0].id);
+                console.log(res);
+                if(res.data[0].acf.songs_ids.length > 0 ) {
+                    const array = [];
+                    for(let i = 0 ; i < res.data[0].acf.songs_ids.length ; i++) {
+                    console.log(res.data[0].acf.songs_ids[i].ID);
+                    array.push(res.data[0].acf.songs_ids[i].ID);
+                    setLikedSongs(array);
+                    }
+                }
+                
+            }).catch((err) => {
+                console.log(err);
+            });
         }).catch((err) => {
             console.log(err);
         });
-    };
-    useEffect(() => {
 
-        fetchUserSongs();
-    });
-    const fetchAlbum = () => {
-        axios.get(
+        
+    };
+
+
+
+    const fetchAlbum = async () => {
+        await axios.get(
             apiUrl,
             config,
         ).then((res) => {
-            console.log(res.data)
             setAlbumTitle(res.data.acf.title);
             setArtistTitle(res.data.acf.artist);
             setAlbumImage(res.data.acf.image.guid);
@@ -65,26 +92,75 @@ const Playlist = () => {
         });
     };
 
+    const updateUserSongs = async (array) => {
+        const config = {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 
+                'Authorization': `Bearer ${localStorage.getItem('login')}`
+            },
+        };
+        const data = {
+            "fields": {
+                "songs_ids": array
+
+            },
+            "status": "publish"
+        };
+        await axios.post(
+            apiUserSongUrl,
+            data,
+            config,
+        ).then((res) => {
+            console.log(res);
+        }).catch((err) => {
+            console.log(err.response.data.message);
+        });
+    }
+
     useEffect (() => {
         fetchAlbum();
+        fetchUserSongs();
+
+        // fetchAlbum();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
-const handleTrash = () => {
-    let result = window.confirm("Want to delete?");
-    if (result) {
-        console.log("deleted song");
+    useEffect(() => {
+        likedSongs.forEach(like => {
+            console.log("like "+like);
+            if(document.getElementById(like) !== null ) {
+                document.getElementById(like).classList.add("a-songOverviewButton");
+                document.getElementById(like).classList.remove("a-songOverviewButtonAlt");
+            }
+
+        });
+        console.log(likedSongs);
+    },[likedSongs])
+
+    const handleLike = (id) => {
+            const array = likedSongs;
+            const index = array.indexOf(id);
+            if (index > -1) {
+                array.splice(index, 1);
+            } else {
+                array.push(id);
+            }
+            setLikedSongs(likedSongs);
+            console.log(likedSongs);
+            updateUserSongs(array);
+        }
+
+    const handleMenu = () => {
+        setPopupState(!popupState);
     }
-}
-const handleMenu = () => {
-    setPopupState(!popupState);
-}
     return (
         <div>
             <HeaderContainer/>
             <div className="row o-collectionSongOverview">
 
                 { songs && songs.map((data, index) => 
+                // console.log(songs)
                     <div className="row m-songOveriew" key={index}>
                         <div className="col-2">
                             <img src={albumImage} alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
@@ -93,8 +169,8 @@ const handleMenu = () => {
                             <span className="a-songOveriewTitle">{data.post_title}</span>
                             <span className="a-songOveriewArtist">{artistTitle}</span>
                         </div>
-                        <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                            <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
+                        <div className="col-2 m-songOverviewButton" onClick={() => handleLike(data.ID)}>
+                            <FontAwesomeIcon icon={faHeart} className="a-songOverviewButtonAlt" id={data.ID} />
                         </div>
                         <div className="col-2 m-songOverviewButton" onClick={handleMenu}>
                             <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
