@@ -8,7 +8,6 @@ import {HeaderContainer, Player, LocalTunesContext } from '../components';
 import SongPopup from '../components/songPopup';
 import axios from 'axios';
 
-
 const Playlist = () => {
     const { popupState, setPopupState} = useContext(LocalTunesContext);
     const { setAlbumTitle, setAlbumImage, setArtistTitle, artistTitle, albumImage } = useContext(LocalTunesContext);
@@ -17,7 +16,6 @@ const Playlist = () => {
     const [ likedSongsID, setLikedSongsID ] = useState();
     // eslint-disable-next-line no-unused-vars
     const [ userID, setUserID ] = useState();
-
     let { id } = useParams();
 
     const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums/${id}`;
@@ -59,11 +57,12 @@ const Playlist = () => {
                 console.log(res);
                 if(res.data[0].acf.songs_ids.length > 0 ) {
                     const array = [];
+                    console.log(res.data[0].acf.songs_ids);
                     for(let i = 0 ; i < res.data[0].acf.songs_ids.length ; i++) {
                     console.log(res.data[0].acf.songs_ids[i].ID);
                     array.push(res.data[0].acf.songs_ids[i].ID);
-                    setLikedSongs(array);
-                    }
+                }
+                setLikedSongs(array);
                 }
                 
             }).catch((err) => {
