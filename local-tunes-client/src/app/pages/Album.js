@@ -148,6 +148,7 @@ const Playlist = () => {
             setLikedSongs(likedSongs);
             console.log(likedSongs);
             updateUserSongs(array);
+            window.location.reload();
         }
 
     const handleMenu = () => {

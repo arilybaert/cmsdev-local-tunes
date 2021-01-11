@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {HeaderContainer} from '../components';
 import axios from 'axios';
 
@@ -7,16 +7,20 @@ const Upload = () => {
     const [form, setForm] = useState({
         artist: "",
         album: "",
-        songs: ""
+        songs: "",
+        genre: ""
     });
     const [ songIDs, setSongIDs ] = useState([]);
     const [ imgID, setImgID ] = useState([]);
+    const [ genres, setGenres ] = useState([]);
 
     /*
     API information
     */
     const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media/`;
     const apiUrlAlbum = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums/`;
+    const apiUrlGenres = `${process.env.REACT_APP_URL}/wp-json/wp/v2/genres`;
+
     const config = {
         method: 'POST',
         mode: 'no-cors',
@@ -31,6 +35,18 @@ const Upload = () => {
           [event.target.name]: value
         });
     }
+
+    // fetch available genres from db
+    const fetchGenres = async () => {
+        await axios.get(
+            apiUrlGenres,
+            config
+        ).then((res) => setGenres(res.data))
+        .catch((res) => console.log(res));
+    }
+    useEffect(() => {
+        fetchGenres();
+    })
     const uploadAlbumInformation = async () => {
         const data = {
             "title": form.album,
@@ -38,7 +54,8 @@ const Upload = () => {
                 "title": form.album,
                 "artist": form.artist,
                 "songs": songIDs,
-                "image": imgID
+                "image": imgID,
+                "genre": form.genre
             },
             "status": "publish"
         };
@@ -53,7 +70,8 @@ const Upload = () => {
         }).catch((err) => {
             console.log(err.response.data.message);
         })
-    }
+    };
+
     const uploadImg = async (image) => {
         const imgData = new FormData();
         imgData.set("file", image.files[0]);
@@ -139,7 +157,16 @@ const Upload = () => {
                         <input type="text" name="album" className="a-authTextInput" value={form.album} onChange={handleChange}></input>
                         <input type="hidden" name="cover-art"></input>
                         <input type="hidden" value={songIDs} name="songs"></input>
+                        <label htmlFor="genre" className="a-authTextLabel">Genre</label>
 
+                        <select name="genre" id="genre" onChange={handleChange}>
+                            {
+                                genres && genres.map((data, index) => 
+                                    <option value={data.id} key={index}>{data.title.rendered}</option>
+                                )
+                            }
+
+                        </select>
                         <button type="submit" className="a-authButton" onClick={handleSubmit}>Upload</button>
                     </form>
                 </div>
