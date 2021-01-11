@@ -1,4 +1,17 @@
  <?php
+ add_filter( 'rest_albums_query', function( $args ) {
+	$fields = array( 'genre' );
+
+	foreach ( $fields as $field ) {
+			if ( isset( $_GET[ $field ] ) && ! empty( $_GET[ $field ] ) ) {
+					$args['meta_query'][] = array(
+							'key'   => $field,
+							'value' => esc_sql( $_GET[ $field ] ),
+					);
+			}
+	}
+	return $args; 
+} );
 
 function my_customize_rest_cors() {
 	remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
@@ -34,27 +47,5 @@ function get_rest_featured_image( $object, $field_name, $request ) {
 add_action('rest_api_init', 'register_rest_images' );
 add_action( 'rest_api_init', 'my_customize_rest_cors', 15 );
 
-/* 
-@TODO: Fix Filter to search based in specific genre
-*/
 
-add_filter( 'rest_query_vars', function( $valid_vars ) {
-    return array_merge( $valid_vars, array( 'meta_query', 'meta_key', 'meta_value' ) );
-} );
-add_filter( 'rest_album_query', function( $args, $request ) {
-    $key   = $request->get_param( 'meta_key' );
-    $value = $request->get_param( 'meta_value' );
-
-    if ( 'genre' == $key && ! empty( $value ) ) {
-        $args['meta_query'] = array(
-            array(
-                'key'     => $key,
-                'value'   => $value,
-                'compare' => '=',
-            )
-        );      
-    }
-
-    return $args;
-}, 10, 2 );
 ?>
