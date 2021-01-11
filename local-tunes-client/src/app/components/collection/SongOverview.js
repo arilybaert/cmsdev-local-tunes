@@ -9,9 +9,11 @@ import axios from 'axios';
 const SongOverview = () => {
     const { popupState, setPopupState} = useContext(LocalTunesContext);
     const [ likedSongs, setLikedSongs ] = useState();
+    const [ userId, setUserId ] = useState();
     const apiUrlUser = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
     const apiUrlAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums`;
-    
+    const apiUrlUserLikes = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=${userId}`;
+    const apiUrlUpdateUserLikes = `${process.env.REACT_APP_URL}//wp-json/wp/v2/songs/id`;
     const config = {
         method: 'GET',
         mode: 'no-cors',
@@ -26,7 +28,7 @@ const SongOverview = () => {
             apiUrlUser,
             config
         ).then((res) => {
-            console.log(res.data.id);
+            setUserId(res.data.id);
             // fetch liked songs
             axios.get(
                 `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=2`,
@@ -62,10 +64,35 @@ const SongOverview = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-const handleTrash = () => {
+const handleTrash = (id) => {
     let result = window.confirm("Want to delete?");
     if (result) {
-        console.log("deleted song");
+        axios.get(
+            apiUrlUserLikes,
+            config
+        ).then((res) => {
+            const songArr = res.data[0].acf.songs_ids;
+            const userLikesID = res.data[0].id
+            songArr.forEach((song, index) => {
+                if(song.ID === id) {
+                    console.log("index " + index);
+                    songArr.splice(index, 1);
+                }
+                const data = {
+                    "fields": {
+                        songs_ids: songArr
+                    }
+                }
+                axios.post(
+                    `${process.env.REACT_APP_URL}//wp-json/wp/v2/songs/${userLikesID}`,
+                    data,
+                    config
+                ).then((res) => fetchUserSongs())
+                .catch((res) => console.log(res));
+
+            });
+        })
+        .catch((res)=> console.log(res));
     }
 }
 const handleMenu = () => {
@@ -84,7 +111,7 @@ const handleMenu = () => {
                         <span className="a-songOveriewTitle">{data.post_title}</span>
                         <span className="a-songOveriewArtist">{data.artist}</span>
                     </div>
-                    <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
+                    <div className="col-2 m-songOverviewButton" onClick={() => handleTrash(data.ID)}>
                         <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
                     </div>
                     <div className="col-2 m-songOverviewButton" onClick={handleMenu}>
@@ -96,166 +123,8 @@ const handleMenu = () => {
                 )
             }
 
-        
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
 
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
 
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
-
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
-
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
-
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
-
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
-
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
-
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
-
-        <div className="row m-songOveriew">
-            <div className="col-2">
-                <img src="https://i0.wp.com/proxymusic.club/wp-content/uploads/2018/07/klarwein-davis-bitches2.jpg?fit=2280%2C2280&ssl=1" alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
-            </div>
-            <div className="col-6 m-songOveriewTitle">
-                <span className="a-songOveriewTitle">Hazy Jane</span>
-                <span className="a-songOveriewArtist">Nick Drake</span>
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faHeart} className="a-songOverviewButton" id="discover" />
-            </div>
-            <div className="col-2 m-songOverviewButton" onClick={handleTrash}>
-                <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />
-            </div>
-        </div>
 
     </div>
 
