@@ -125,42 +125,42 @@ const Discover = () => {
 
                 :
             <div className="o-masonry">
-                <Link to={`/discover/genre/${genres && genres[0].slug}`} className="o-mansonry-1 o-masonryCommon">
+                <Link to={`/discover/genre/${genres && genres[0].id}`} className="o-mansonry-1 o-masonryCommon">
                     <div className="m-masonry">
                         <p className="a-masonry">{genres && genres[0].title.rendered}</p>
                     </div>
                 </Link>
-                <Link to={`/discover/genre/${genres && genres[1].slug}`} className="o-mansonry-2 o-masonryCommon">
+                <Link to={`/discover/genre/${genres && genres[1].id}`} className="o-mansonry-2 o-masonryCommon">
                     <div className="m-masonry">
                         <p className="a-masonry">{genres && genres[1].title.rendered}</p>
                     </div>
                 </Link>
-                <Link to={`/discover/genre/${genres && genres[2].slug}`} className="o-mansonry-3 o-masonryCommon">
+                <Link to={`/discover/genre/${genres && genres[2].id}`} className="o-mansonry-3 o-masonryCommon">
                     <div className="m-masonry">
                         <p className="a-masonry">{genres && genres[2].title.rendered}</p>
                     </div>
                 </Link>
-                <Link to={`/discover/genre/${genres && genres[3].slug}`} className="o-mansonry-4 o-masonryCommon">
+                <Link to={`/discover/genre/${genres && genres[3].id}`} className="o-mansonry-4 o-masonryCommon">
                     <div className="m-masonry">
                         <p className="a-masonry">{genres && genres[3].title.rendered}</p>
                     </div>
                 </Link>
-                <Link to={`/discover/genre/${genres && genres[4].slug}`} className="o-mansonry-5 o-masonryCommon">
+                <Link to={`/discover/genre/${genres && genres[4].id}`} className="o-mansonry-5 o-masonryCommon">
                     <div className="m-masonry">
                         <p className="a-masonry">{genres && genres[4].title.rendered}</p>
                     </div>
                 </Link>
-                <Link to={`/discover/genre/${genres && genres[5].slug}`} className="o-mansonry-6 o-masonryCommon">
+                <Link to={`/discover/genre/${genres && genres[5].id}`} className="o-mansonry-6 o-masonryCommon">
                     <div className="m-masonry">
                         <p className="a-masonry">{genres && genres[5].title.rendered}</p>
                     </div>
                 </Link>
-                <Link to={`/discover/genre/${genres && genres[6].slug}`} className="o-mansonry-7 o-masonryCommon">
+                <Link to={`/discover/genre/${genres && genres[6].id}`} className="o-mansonry-7 o-masonryCommon">
                     <div className="m-masonry">
                         <p className="a-masonry">{genres && genres[6].title.rendered}</p>
                     </div>
                 </Link>
-                <Link to={`/discover/genre/${genres && genres[7].slug}`} className="o-mansonry-8 o-masonryCommon">
+                <Link to={`/discover/genre/${genres && genres[7].id}`} className="o-mansonry-8 o-masonryCommon">
                     <div className="m-masonry">
                         <p className="a-masonry">{genres && genres[7].title.rendered}</p>
                     </div>

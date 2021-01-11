@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import {useParams} from 'react-router-dom';
 import {Player, HeaderContainer,LocalTunesContext} from '../components';
 import axios from 'axios';
@@ -7,26 +7,46 @@ import { Link } from "react-router-dom";
 
 
 const Genre = () => {
+    const [ albums, setAlbums ] = useState();
     const {setGenreTitle, discoverState} = useContext(LocalTunesContext);
     const {genre} = useParams();
-    const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?filter[orderby]=likes&order=desc`;
+    const apiUrlGenre = `${process.env.REACT_APP_URL}/wp-json/acf/v3/albums/?genre=${genre}`;
+    const apiUrlGenreName = `${process.env.REACT_APP_URL}/wp-json/wp/v2/genres/${genre}`
 
     const config = {
         method: 'GET',
         mode: 'no-cors',
-        headers: { 
-            // 'Authorization': `Bearer ${localStorage.getItem('login')}`,
-        },
     };
 
     useEffect(() => {
         console.log(discoverState);
     },[discoverState]);
 
-    useEffect(() => {
-        setGenreTitle(genre);
-    });
+    // useEffect(() => {
+    //     setGenreTitle(genreName);
+    // });
 
+
+    const fetchGenre = () => {
+        axios.get(
+            apiUrlGenreName,
+            config
+        ).then((res) => setGenreTitle(res.data.title.rendered))
+        .catch((res) => console.log(res));
+    }
+    const fetchAlbums = () => {
+        axios.get(
+            apiUrlGenre,
+            config
+        ).then((res) => {
+            setAlbums(res.data);
+        })
+        .catch((res) => console.log(res));
+    };
+    useEffect(() => {
+        fetchGenre()
+        fetchAlbums()
+    },[]);
 
     // const fetchListens = () => {
     //     axios.get(
@@ -51,22 +71,19 @@ const Genre = () => {
             {discoverState === "mostListened" ?
 
                 <div className="row o-homeSection">
-                    
-                    <div className="col-4 o-releaseCard">
-                        <div className="m-releaseCard">
-                            <img src="https://i.redd.it/aayfot0hjwn21.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                            <span className="a-albumTitleHome">Kid A</span>
-                            <span className="a-albumArtistHome">Radiohead</span>
-                        </div>
-                    </div>
+                    {
+                        albums && albums.map((data, index) => 
+                        <Link to={`/album/${data.id}`} className="col-4 o-releaseCard o-genre" key={index}>
+                            <div className="m-releaseCard">
+                                <img src={data.acf.image.guid} alt="cover-art" title="cover-art" className="a-cardImg"></img>
+                                <span className="a-albumTitleHome">{data.acf.title}</span>
+                                <span className="a-albumArtistHome">{data.acf.artist}</span>
+                            </div>
+                        </Link>
+                        )
+                    }
 
-                    <div className="col-4 o-releaseCard">
-                        <div className="m-releaseCard">
-                            <img src="https://i.redd.it/aayfot0hjwn21.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                            <span className="a-albumTitleHome">Kid A</span>
-                            <span className="a-albumArtistHome">Radiohead</span>
-                        </div>
-                    </div> 
+
                 </div>
             : ""}
             {discoverState === "mostRecent" ?

@@ -57,6 +57,7 @@ color: $white-color;
 
     .o-releaseCard {
 
+
         .m-releaseCard {
             display: flex;
             flex-direction: column;
@@ -74,5 +75,28 @@ color: $white-color;
                 font-weight: 200;
             }
         }
+    }
+        /* unvisited link */
+    a:link {
+        color: $white-color;
+        text-decoration: none;
+    }
+    
+    /* visited link */
+    a:visited {
+        color: $white-color;
+        text-decoration: none;
+    }
+    
+    /* mouse over link */
+    a:hover {
+        color: $accent-color;
+        text-decoration: none;
+    }
+    
+    /* selected link */
+    a:active {
+        color: $white-color;
+        text-decoration: none;
     }
 }
