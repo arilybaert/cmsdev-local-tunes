@@ -131,17 +131,23 @@ const Playlist = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
-    useEffect(() => {
+
+    const likeChange = () => {
+        // remove like colors
+        const btns = document.querySelectorAll(".a-songBtn");
+        btns.forEach(btn => {
+            btn.classList.remove("a-songOverviewButton");
+            btn.classList.add("a-songOverviewButtonAlt");
+        })
         likedSongs.forEach(like => {
-            console.log("like "+like);
             if(document.getElementById(like) !== null ) {
+                // add like colors
                 document.getElementById(like).classList.add("a-songOverviewButton");
                 document.getElementById(like).classList.remove("a-songOverviewButtonAlt");
             }
 
         });
-        console.log(likedSongs);
-    },[likedSongs])
+    }
 
     const handleLike = (id) => {
             const array = likedSongs;
@@ -155,6 +161,8 @@ const Playlist = () => {
             console.log(likedSongs);
             updateUserSongs(array);
             // window.location.reload();
+            likeChange();
+
         }
 
     const handleMenu = () => {
@@ -176,7 +184,7 @@ const Playlist = () => {
                             <span className="a-songOveriewArtist">{artistTitle}</span>
                         </div>
                         <div className="col-2 m-songOverviewButton" onClick={() => handleLike(data.ID)}>
-                            <FontAwesomeIcon icon={faHeart} className="a-songOverviewButtonAlt" id={data.ID} />
+                            <FontAwesomeIcon icon={faHeart} className="a-songBtn a-songOverviewButtonAlt" id={data.ID} />
                         </div>
                         <div className="col-2 m-songOverviewButton" onClick={handleMenu}>
                             <FontAwesomeIcon icon={faEllipsisV} className="a-songOverviewButtonAlt" id="discover" />

@@ -34,7 +34,7 @@ function App () {
     
 
     return (
-        <div className="container-fluid">
+        <div className="container-fluid o-app">
             <LocalTunesContextProvider>
 
                 <Router>
