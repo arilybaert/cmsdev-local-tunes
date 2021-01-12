@@ -2,7 +2,7 @@ import React, {  useContext, useEffect }  from 'react';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faHeart, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import {HeaderContainer, Player, LocalTunesContext } from '../components';
+import {HeaderContainer, LocalTunesContext, Navigation } from '../components';
 import SongPopup from '../components/songPopup';
 
 const Artist = () => {
@@ -172,7 +172,7 @@ const handleMenu = () => {
 
             </div>
 
-            <Player/>
+            <Navigation/>
         </div>
 
     )

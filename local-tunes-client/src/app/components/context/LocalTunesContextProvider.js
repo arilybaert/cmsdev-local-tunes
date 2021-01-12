@@ -6,6 +6,7 @@ const LocalTunesContextProvider = ({children}) => {
 
     const [ collectionHeader, setCollectionHeader ] = useState("playlists");
 
+    const [ audioSrc, setAudioSrc ] = useState();
     const [ playlistImage, setPlaylistImage ] = useState();
     const [ playlistTitle, setPlaylistTitle ] = useState();
 
@@ -26,8 +27,9 @@ const LocalTunesContextProvider = ({children}) => {
     const [ login, setLogin ] = useState();
 
 
+
     return (
-        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage}}>
+        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc }}>
 
             {children}
 

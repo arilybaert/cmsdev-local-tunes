@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-import {Player, HeaderContainer, LocalTunesContext} from '../components';
+import { HeaderContainer, LocalTunesContext, Navigation} from '../components';
 const Discover = () => {
     
     const { searchTerm } = useContext(LocalTunesContext);
@@ -57,7 +57,7 @@ const Discover = () => {
     return (
         <div>
             <HeaderContainer/>
-            <Player/>
+            <Navigation/>
             {searchState ? 
                 <div className="o-searchResults row">
                     <div className="col-12 m-resultsTitle">

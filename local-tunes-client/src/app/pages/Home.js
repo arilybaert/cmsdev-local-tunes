@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Player, HeaderContainer} from '../components';
+import { HeaderContainer, Navigation} from '../components';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
@@ -157,8 +157,8 @@ const Home = () => {
             </div>
 
 
-
-            <Player/>
+            <Navigation/>
+            {/* <Player/> */}
         </div>
     )
 }

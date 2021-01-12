@@ -13,7 +13,7 @@ const SongOverview = () => {
     const apiUrlUser = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
     const apiUrlAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums`;
     const apiUrlUserLikes = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=${userId}`;
-    const apiUrlUpdateUserLikes = `${process.env.REACT_APP_URL}//wp-json/wp/v2/songs/id`;
+
     const config = {
         method: 'GET',
         mode: 'no-cors',

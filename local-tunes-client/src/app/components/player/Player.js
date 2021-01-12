@@ -1,12 +1,34 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faChevronDown, faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
 
-import {Navigation} from '../../components';
+
+import { LocalTunesContext } from '../context';
 const Player = () => {
 
     const [ playerStatus, setPlayerStatus ] = useState(false);
     const [ playerMin, setPlayerMin ] = useState(true);
+
+    const { audioSrc } = useContext(LocalTunesContext);
+
+    const [ audioTune, setAudioTune ] = useState();
+
+
+    useEffect(() => {
+        try {
+            audioTune.pause();
+            audioTune.currentTime = 0;
+        } catch (err) {}
+
+        const audio = new Audio(audioSrc);
+        if(audio.src.length > 0) {
+            audio.play();
+            setAudioTune(audio);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[audioSrc]);
+
+
 
 
     const handleMiniPlayerClick = () => {
@@ -25,24 +47,25 @@ const Player = () => {
             { playerMin ?
                 <div className="o-player" onClick={handleMiniPlayerState}>
 
-                <div className="row">
-                    <div className="col-3">
-                        <img src="https://i.redd.it/aayfot0hjwn21.png" title="cover-art" alt="cover-art" className="a-playerImg"></img>
-                    </div>
-                    
-                    <div className="col-6 m-currentTrackMiniPlayer">
-                        <span className="a-currentTrackMiniPlayer">Optimistic</span>
-                        <span className="a-currentAlbumMiniPlayer">Kid A</span>
-                    </div>
+                    {/* <div className="row">
+                        <div className="col-3">
+                            <img src="https://i.redd.it/aayfot0hjwn21.png" title="cover-art" alt="cover-art" className="a-playerImg"></img>
+                        </div>
+                        
+                        <div className="col-6 m-currentTrackMiniPlayer">
+                            <span className="a-currentTrackMiniPlayer">Optimistic</span>
+                            <span className="a-currentAlbumMiniPlayer">Kid A</span>
+                        </div>
 
-                    <div className="col-3 m-playerIcon">
-                        <FontAwesomeIcon icon={!playerStatus ? faPause : faPlay} className="a-playLogo" onClick={handleMiniPlayerClick}/>
-                    </div>
-                </div>
+                        <div className="col-3 m-playerIcon">
+                            <FontAwesomeIcon icon={!playerStatus ? faPause : faPlay} className="a-playLogo" onClick={handleMiniPlayerClick}/>
+                        </div>
+                    </div> */}
 
-                <Navigation/>
+                {/* <Navigation/> */}
             </div>
             :
+
             <div  className="o-playerMax">
                 <div className="row o-closeBtn">
                     <div className="col-10"></div>
@@ -77,6 +100,7 @@ const Player = () => {
                     </div>
                     <div className="col-3"></div>
                 </div>
+
             </div>
             }
         </div>

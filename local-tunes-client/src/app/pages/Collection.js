@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Player, HeaderContainer, PlaylistOverview, LocalTunesContext, ArtistOverview, SongOverview} from '../components';
+import { HeaderContainer, PlaylistOverview, LocalTunesContext, ArtistOverview, SongOverview, Navigation} from '../components';
 
 const Collection = () => {
 
@@ -11,7 +11,7 @@ const Collection = () => {
             {collectionHeader && collectionHeader === "playlists"? <PlaylistOverview/> : ''}
             {collectionHeader && collectionHeader === "artists"? <ArtistOverview/> : ''}
             {collectionHeader && collectionHeader === "songs"? <SongOverview/> : ''}
-            <Player/>
+            <Navigation/>
         </div>
     )
 }

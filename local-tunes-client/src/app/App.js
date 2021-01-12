@@ -2,7 +2,7 @@ import React, { useEffect, useState } from'react';
 import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import * as Routes from './routes'
-import { LocalTunesContextProvider } from './components';
+import { LocalTunesContextProvider, Player } from './components';
 import {
     Collection,
     Home,
@@ -16,7 +16,7 @@ import {
     Upload,
     ChangePassword,
     CreatePlaylist,
-    Album
+    Album,
 } from './pages';
 import './styles/App.scss';
 
@@ -69,7 +69,7 @@ function App () {
 
                     }
                 </Router>
-
+                <Player/>
             </LocalTunesContextProvider>
         </div>
     )

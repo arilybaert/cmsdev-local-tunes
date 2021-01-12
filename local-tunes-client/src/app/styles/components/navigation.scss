@@ -3,6 +3,11 @@
     border-radius: 30px;
     margin:  0 16px;
     height: 3rem;
+    z-index: 10000;
+    position: fixed;
+    right: 0px;
+    left: 0px;
+    bottom: 15px;
 
     .m-navigationBottom {
         display: flex;

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faHeart, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
-import {HeaderContainer, Player, LocalTunesContext } from '../components';
+import {HeaderContainer, LocalTunesContext, Navigation } from '../components';
 import SongPopup from '../components/songPopup';
 import axios from 'axios';
 
@@ -12,6 +12,8 @@ const Playlist = () => {
     // context
     const { popupState, setPopupState} = useContext(LocalTunesContext);
     const { setAlbumTitle, setAlbumImage, setArtistTitle, artistTitle, albumImage } = useContext(LocalTunesContext);
+    const { setAudioSrc } = useContext(LocalTunesContext);
+
 
     // states
     const [ songs, setSongs ] = useState();
@@ -19,8 +21,6 @@ const Playlist = () => {
     const [ likedSongsID, setLikedSongsID ] = useState();
     // eslint-disable-next-line no-unused-vars
     const [ userID, setUserID ] = useState();
-
-
 
     let { id } = useParams();
 
@@ -58,17 +58,21 @@ const Playlist = () => {
                 `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=${res.data.id}`, // tried this with setUserID but it updates to late. So the result below gives me undefined
                 conf,
             ).then((res) => {
-                setLikedSongs([]);
                 setLikedSongsID(res.data[0].id);
-                console.log(res);
                 if(res.data[0].acf.songs_ids.length > 0 ) {
                     const array = [];
-                    console.log(res.data[0].acf.songs_ids);
                     for(let i = 0 ; i < res.data[0].acf.songs_ids.length ; i++) {
-                    console.log(res.data[0].acf.songs_ids[i].ID);
                     array.push(res.data[0].acf.songs_ids[i].ID);
                 }
                 setLikedSongs(array);
+                array.forEach(like => {
+                    if(document.getElementById(like) !== null ) {
+                        // add like colors
+                        document.getElementById(like).classList.add("a-songOverviewButton");
+                        document.getElementById(like).classList.remove("a-songOverviewButtonAlt");
+                    }
+        
+                });
                 }
                 
             }).catch((err) => {
@@ -80,8 +84,6 @@ const Playlist = () => {
 
         
     };
-
-
 
     const fetchAlbum = async () => {
         await axios.get(
@@ -117,21 +119,11 @@ const Playlist = () => {
             data,
             config,
         ).then((res) => {
-            console.log(res);
+            // console.log(res);
         }).catch((err) => {
             console.log(err.response.data.message);
         });
     }
-
-    useEffect (() => {
-        fetchAlbum();
-        fetchUserSongs();
-
-        // fetchAlbum();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
-
-
     const likeChange = () => {
         // remove like colors
         const btns = document.querySelectorAll(".a-songBtn");
@@ -139,6 +131,7 @@ const Playlist = () => {
             btn.classList.remove("a-songOverviewButton");
             btn.classList.add("a-songOverviewButtonAlt");
         })
+        console.log(likedSongs);
         likedSongs.forEach(like => {
             if(document.getElementById(like) !== null ) {
                 // add like colors
@@ -149,6 +142,16 @@ const Playlist = () => {
         });
     }
 
+    useEffect (() => {
+        fetchAlbum();
+        fetchUserSongs();
+        likeChange();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[]);
+
+
+
+
     const handleLike = (id) => {
             const array = likedSongs;
             const index = array.indexOf(id);
@@ -158,7 +161,6 @@ const Playlist = () => {
                 array.push(id);
             }
             setLikedSongs(likedSongs);
-            console.log(likedSongs);
             updateUserSongs(array);
             // window.location.reload();
             likeChange();
@@ -168,14 +170,16 @@ const Playlist = () => {
     const handleMenu = () => {
         setPopupState(!popupState);
     }
+    const setAudio = (id) => setAudioSrc(id);
+
     return (
         <div>
             <HeaderContainer/>
             <div className="row o-collectionSongOverview">
 
                 { songs && songs.map((data, index) => 
-                // console.log(songs)
-                    <div className="row m-songOveriew" key={index}>
+                // console.log(data)
+                    <div className="row m-songOveriew" key={index} onClick={() => setAudio(data.guid)}>
                         <div className="col-2">
                             <img src={albumImage} alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
                         </div>
@@ -197,7 +201,7 @@ const Playlist = () => {
 
 
             </div>
-            <Player/>
+            <Navigation/>
         </div>
     )
 };

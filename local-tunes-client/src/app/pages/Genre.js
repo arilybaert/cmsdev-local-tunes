@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import {useParams} from 'react-router-dom';
-import {Player, HeaderContainer,LocalTunesContext} from '../components';
+import { HeaderContainer,LocalTunesContext, Navigation} from '../components';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 
@@ -109,7 +109,7 @@ const Genre = () => {
             
             
 
-            <Player/>
+            <Navigation/>
         </div>
     )
 }
