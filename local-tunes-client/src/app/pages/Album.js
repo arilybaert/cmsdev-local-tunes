@@ -9,19 +9,25 @@ import SongPopup from '../components/songPopup';
 import axios from 'axios';
 
 const Playlist = () => {
+    // context
     const { popupState, setPopupState} = useContext(LocalTunesContext);
     const { setAlbumTitle, setAlbumImage, setArtistTitle, artistTitle, albumImage } = useContext(LocalTunesContext);
+
+    // states
     const [ songs, setSongs ] = useState();
     const [ likedSongs, setLikedSongs ] = useState([]);
     const [ likedSongsID, setLikedSongsID ] = useState();
     // eslint-disable-next-line no-unused-vars
     const [ userID, setUserID ] = useState();
+
+
+
     let { id } = useParams();
 
+    // consts
     const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums/${id}`;
     const apiUserSongUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs/${likedSongsID}`;
     const apiUserID = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
-
     const config = {
         method: 'GET',
         mode: 'no-cors',
