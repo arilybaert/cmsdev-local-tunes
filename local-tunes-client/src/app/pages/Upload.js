@@ -10,16 +10,18 @@ const Upload = () => {
         songs: "",
         genre: ""
     });
-    const [ songIDs, setSongIDs ] = useState([]);
+    // const [ songIDs, setSongIDs ] = useState([]);
     const [ imgID, setImgID ] = useState([]);
     const [ genres, setGenres ] = useState([]);
-
+    const [ uid, setUid ] = useState();
+    const songIDs = []
     /*
     API information
     */
     const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media/`;
     const apiUrlAlbum = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums/`;
     const apiUrlGenres = `${process.env.REACT_APP_URL}/wp-json/wp/v2/genres`;
+    const apiUrlUId = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
 
     const config = {
         method: 'POST',
@@ -28,6 +30,15 @@ const Upload = () => {
             'Authorization': `Bearer ${localStorage.getItem('login')}`,
         },
     };
+
+    // get artist id
+    useEffect(() => {
+        axios.get(
+            apiUrlUId,
+            config
+        ).then((res) => setUid(res.data.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     const handleChange = (event) => {
         const value = event.target.value;
         setForm({
@@ -52,7 +63,7 @@ const Upload = () => {
             "title": form.album,
             "fields": {
                 "title": form.album,
-                "artist": form.artist,
+                "artist": uid,
                 "songs": songIDs,
                 "image": imgID,
                 "genre": form.genre
@@ -90,7 +101,7 @@ const Upload = () => {
         })
     }
     const uploadsongs = (songs) => {        // Loop throug songs and upload them one by one
-        Array.from(songs.files).forEach( async (f) => { 
+        Array.from(songs.files).forEach( async (f, i) => { 
             const formData = new FormData();
             formData.set("file", f);
 
@@ -99,15 +110,20 @@ const Upload = () => {
                 formData,
                 config
             ).then((res) => {
-                setSongIDs(songIDs.push(res.data.id));
+                songIDs.push(res.data.id);
                 console.log(songIDs);
-                const coverart = document.getElementById("a-cover-art"); // find selected cover art
-                uploadImg(coverart);  // sorry for the ghetto solution 
+                if(i === songs.files.length-1) {
+                    const coverart = document.getElementById("a-cover-art"); // find selected cover art
+                    uploadImg(coverart);  // sorry for the ghetto solution 
+
+                }
+
 
             }).catch((err) => {
                 console.log(err.response.data.message);
             })
         });
+
     }
 
 
@@ -151,8 +167,7 @@ const Upload = () => {
                     {/* </form> */}
 
                     {/* <form className="m-form"> */}
-                    <label htmlFor="artist" className="a-authTextLabel">Artist</label>
-                        <input type="text" name="artist" className="a-authTextInput" onChange={handleChange} value={form.artist} ></input>
+
                         <label htmlFor="album" className="a-authTextLabel">Album</label>
                         <input type="text" name="album" className="a-authTextInput" value={form.album} onChange={handleChange}></input>
                         <input type="hidden" name="cover-art"></input>

@@ -6,6 +6,8 @@ import { faPlay, faPause, faChevronDown, faForward, faBackward } from '@fortawes
 import { LocalTunesContext } from '../context';
 const Player = () => {
 
+    const [header, setHeader] = useState(window.location.pathname);
+
     const [ playerStatus, setPlayerStatus ] = useState(false);
     const [ playerMin, setPlayerMin ] = useState(true);
 
@@ -42,7 +44,20 @@ const Player = () => {
 
     // }, [playerStatus]);
 
-    return (
+    // return (
+    //     header && header === "/register" ? 
+    //     <div></div>
+    //     :
+        if (header === "/register" ) {
+            return ""
+        } else if (header === "/login") {
+            return ""
+        } else if (header === "/upload") {
+            return ""
+        } else {
+            return (
+
+
         <div>
             { playerMin ?
                 <div className="o-player" onClick={handleMiniPlayerState}>
@@ -105,8 +120,8 @@ const Player = () => {
             }
         </div>
 
-       
-    )
+)
+}
 }
 
 export default Player;

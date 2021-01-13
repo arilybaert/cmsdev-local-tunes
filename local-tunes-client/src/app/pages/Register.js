@@ -11,8 +11,10 @@ const Register = () => {
     const [errorMsg, setErrorMsg] = useState();
     const [form, setForm] = useState({
         username: "",
+        name: "",
         email:"",
-        password: ""
+        password: "",
+        role: "",
     });
     const config = {
         method: 'POST',
@@ -28,12 +30,16 @@ const Register = () => {
     }
     const apiUrlCreate = 'http://www.local-tunes-server.test/wp-json/jwt-auth/v1/token';
     const apiUrlRegister = 'http://www.local-tunes-server.test/wp-json/wp/v2/users/register';
+    const apiUrlCreateLikedSongs = 'http://www.local-tunes-server.test/wp-json/wp/v2/songs/';
+    const apiUrlUpdateUser = 'http://www.local-tunes-server.test/wp-json/wp/v2/users/';
 
-    const userCreate = async (username, email, password, config, url) => {
+    let uid;
+    const userCreate = async (username, email, password, role, config, url) => {
         const bodyParameters = {
             "username": username,
             "email": email,
-            "password": password
+            "password": password,
+            "role": role
         };
         console.log(bodyParameters);
         await axios.post(
@@ -41,8 +47,8 @@ const Register = () => {
             bodyParameters,
             config)
         .then(function (response) {
-            if ( response.status === 200 ) {
-            }
+            console.log(response.data.id);
+            uid = response.data.id;
         })
 
         .catch((error) => {
@@ -59,7 +65,7 @@ const Register = () => {
         });
     };
 
-    const tokenCreate = (username, password, config, url) => {
+    const tokenCreate = (username, password, name, config, url) => {
         const bodyParameters = {
             "username": username,
             "password": password,
@@ -68,11 +74,37 @@ const Register = () => {
             url,
             bodyParameters,
             config)
-        .then(function (response) {
+        .then( async function  (response) {
             if ( response.status === 200 ) {
                 const data = response.data;
                 localStorage.setItem( 'login', data.token );
 
+                const config = {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 
+                        'Authorization': `Bearer ${data.token}`,
+                    },
+                }
+                const body = {
+                        'title': uid.toString(),
+                        'status': 'publish'
+                }
+                console.log(body);
+                // let liked songs array for user
+                await axios.post(
+                    apiUrlCreateLikedSongs,
+                    body,
+                    config
+                );
+                const userBody = {
+                    "first_name": name
+                }
+                await axios.post(
+                    apiUrlUpdateUser + uid,
+                    userBody,
+                    config
+                )
                 history.push(Routes.HOME);
                 window.location.reload();
             }
@@ -93,9 +125,10 @@ const Register = () => {
     };
 
     const handleSubmit =  async ( e ) => {
+        console.log(form);
         e.preventDefault();
-        await userCreate(form.username, form.email, form.password, config, apiUrlRegister);
-        tokenCreate(form.username, form.password, config, apiUrlCreate);
+        await userCreate(form.username, form.email, form.password, form.role, config, apiUrlRegister);
+        tokenCreate(form.username, form.password, form.name, config, apiUrlCreate);
 
 
     }
@@ -112,17 +145,19 @@ const Register = () => {
                 <form className="m-form">
                     <label htmlFor="username" className="a-authTextLabel">Username</label>
                     <input type="text" name="username" className="a-authTextInput" value={form.username} onChange={handleChange}></input>
+                    <label htmlFor="name" className="a-authTextLabel">Name</label>
+                    <input type="text" name="name" className="a-authTextInput" value={form.name} onChange={handleChange}></input>
                     <label htmlFor="email" className="a-authTextLabel">Email</label>
                     <input type="email" name="email" className="a-authTextInput" value={form.email} onChange={handleChange}></input>
                     <label htmlFor="password" className="a-authTextLabel">Password</label>
                     <input type="password" name="password" className="a-authTextInput" value={form.password} onChange={handleChange}></input>
-                    {/* <label htmlFor="username" className="a-authTextLabel">Are you...</label>
+                    <label htmlFor="username" className="a-authTextLabel">Are you...</label>
                     <div className="m-authRadioButton">
-                        <label for="listener">Listener</label>
-                        <input type="radio" name="listener" value="listener" className="a-authRadioButton"></input>
-                        <label for="listener">Listener</label>s
-                        <input type="radio" name="subject" value="phyArtiestsics" className="a-authRadioButton"></input>
-                    </div> */}
+                        <label htmlFor="role">Listener</label>
+                        <input type="radio" name="role" value="subscriber" className="a-authRadioButton" onChange={handleChange} ></input>
+                        <label htmlFor="role">Artist</label>
+                        <input type="radio" name="role" value="contributor" className="a-authRadioButton" onChange={handleChange} ></input>
+                    </div>
                     <button type="submit" className="a-authButton" onClick={handleSubmit}>Login</button>
                 </form>
             </div>

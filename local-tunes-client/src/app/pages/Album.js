@@ -91,7 +91,7 @@ const Playlist = () => {
             config,
         ).then((res) => {
             setAlbumTitle(res.data.acf.title);
-            setArtistTitle(res.data.acf.artist);
+            setArtistTitle(res.data.acf.artist.data.display_name);
             setAlbumImage(res.data.acf.image.guid);
             setSongs(res.data.acf.songs);
         }).catch((err) => {

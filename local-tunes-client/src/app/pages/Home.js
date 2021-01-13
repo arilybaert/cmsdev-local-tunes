@@ -70,90 +70,30 @@ const Home = () => {
             <div className="row o-homeSection">
                 <div className="col-12 a-homeSectionTitle">All New Release</div>
                 { recentAlbums && recentAlbums.map((data, index) => 
-                    <Link to={`/album/${data.id}`} className="col-4 o-releaseCard" key={index}>
+                    <Link to={`/album/${data.id}`} className="col-4 col-md-3 o-releaseCard" key={index}>
                         <div className="m-releaseCard">
                             <img src={data.acf.image.guid} alt="cover-art" title="cover-art" className="a-cardImg"></img>
                             <span className="a-albumTitleHome">{data.acf.title}</span>
-                            <span className="a-albumArtistHome">{data.acf.artist}</span>
+                            <span className="a-albumArtistHome">{data.acf.artist.data.display_name}</span>
                         </div>
                     </Link>
                 )}
                 
 
-                <div className="col-4 o-releaseCard">
-                    <div className="m-releaseCard">
-                        <img src="https://i.redd.it/aayfot0hjwn21.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                        <span className="a-albumTitleHome">Kid A</span>
-                        <span className="a-albumArtistHome">Radiohead</span>
-                    </div>
-                </div>
+
 
                 <div className="col-12 a-homeSectionTitle">Top Releases</div>
 
                 { topAlbums && topAlbums.map((data, index) => 
                     <Link to={`/album/${data.id}`} className="col-4 o-releaseCard" key={index}>
                         <div className="m-releaseCard">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
+                            <img src={data.acf.image.guid} alt="cover-art" title="cover-art" className="a-cardImg"></img>
                             <span className="a-albumTitleHome">{data.acf.title}</span>
-                            <span className="a-albumArtistHome">{data.acf.artist}</span>
+                            <span className="a-albumArtistHome">{data.acf.artist.data.display_name}</span>
                         </div>
                     </Link>
                 )}
-                <div className="col-4 o-releaseCard">
-                    <div className="m-releaseCard">
-                        <img src="https://i.redd.it/aayfot0hjwn21.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                        <span className="a-albumTitleHome">Kid A</span>
-                        <span className="a-albumArtistHome">Radiohead</span>
-                    </div>
-                </div>
-
-                <div className="col-4 o-releaseCard">
-                    <div className="m-releaseCard">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                        <span className="a-albumTitleHome">Kid A</span>
-                        <span className="a-albumArtistHome">Radiohead</span>
-                    </div>
-                </div>
-
-                <div className="col-4 o-releaseCard">
-                    <div className="m-releaseCard">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                        <span className="a-albumTitleHome">Kid A</span>
-                        <span className="a-albumArtistHome">Radiohead</span>
-                    </div>
-                </div>
-
-                <div className="col-4 o-releaseCard">
-                    <div className="m-releaseCard">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                        <span className="a-albumTitleHome">Kid A</span>
-                        <span className="a-albumArtistHome">Radiohead</span>
-                    </div>
-                </div>
-
-                <div className="col-4 o-releaseCard">
-                    <div className="m-releaseCard">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                        <span className="a-albumTitleHome">Kid A</span>
-                        <span className="a-albumArtistHome">Radiohead</span>
-                    </div>
-                </div>
-
-                <div className="col-4 o-releaseCard">
-                    <div className="m-releaseCard">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                        <span className="a-albumTitleHome">Kid A</span>
-                        <span className="a-albumArtistHome">Radiohead</span>
-                    </div>
-                </div>
-
-                <div className="col-4 o-releaseCard">
-                    <div className="m-releaseCard">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Kendrick_Lamar_-_Damn.png" alt="cover-art" title="cover-art" className="a-cardImg"></img>
-                        <span className="a-albumTitleHome">Kid A</span>
-                        <span className="a-albumArtistHome">Radiohead</span>
-                    </div>
-                </div>
+                
             </div>
 
 

@@ -31,7 +31,7 @@ const SongOverview = () => {
             setUserId(res.data.id);
             // fetch liked songs
             axios.get(
-                `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=2`,
+                `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=${res.data.id}`,
                 config
             ).then((res) => {
                 // setLikedSongs(res.data[0].acf.songs_ids)})
@@ -43,9 +43,10 @@ const SongOverview = () => {
                     arr.forEach(song => {
                         res.data.forEach(album => {
                             album.acf.songs.forEach(songEl => {
+                                console.log(album);
                                 if(songEl.ID === song.ID) {
                                     song.image = album.acf.image.guid
-                                    song.artist = album.acf.artist
+                                    song.artist = album.acf.artist.data.display_name
                                     song.album = album.acf.title
                                 }
                             })
