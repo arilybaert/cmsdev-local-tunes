@@ -29,6 +29,11 @@ const LocalTunesContextProvider = ({children}) => {
     const [ long, setLong ] = useState();
     const [ city, setCity ] = useState();
 
+    const [ playerSong, setPlayerSong ] = useState();
+    const [ playerArtist, setPlayerArtist ] = useState();
+    const [ playerCover, setPlayerCover ] = useState();
+    const [ playerStatus, setPlayerStatus ] = useState(false);
+
     const deg2rad = (deg)  => {
         return deg * (Math.PI/180)
       }
@@ -48,7 +53,7 @@ const LocalTunesContextProvider = ({children}) => {
 
       
     return (
-        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance }}>
+        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus }}>
 
             {children}
 

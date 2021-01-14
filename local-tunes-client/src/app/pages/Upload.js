@@ -1,7 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {HeaderContainer, LocalTunesContext} from '../components';
+import React, { useEffect, useState} from 'react';
+import {HeaderContainer} from '../components';
 import axios from 'axios';
-import openGeocoder from 'node-open-geocoder';
 
 
 const Upload = () => {
@@ -31,8 +30,7 @@ const Upload = () => {
             'Authorization': `Bearer ${localStorage.getItem('login')}`,
         },
     };
-    let lat;
-    let long;
+
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition( function(position) {

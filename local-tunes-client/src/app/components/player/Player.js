@@ -6,17 +6,17 @@ import { faPlay, faPause, faChevronDown, faForward, faBackward } from '@fortawes
 import { LocalTunesContext } from '../context';
 const Player = () => {
 
-    const [header, setHeader] = useState(window.location.pathname);
+    const [header] = useState(window.location.pathname);
 
-    const [ playerStatus, setPlayerStatus ] = useState(false);
     const [ playerMin, setPlayerMin ] = useState(true);
 
-    const { audioSrc } = useContext(LocalTunesContext);
+    const { audioSrc, playerSong, playerArtist, playerCover, playerStatus, setPlayerStatus } = useContext(LocalTunesContext);
 
     const [ audioTune, setAudioTune ] = useState();
 
 
     useEffect(() => {
+
         try {
             audioTune.pause();
             audioTune.currentTime = 0;
@@ -31,13 +31,35 @@ const Player = () => {
     },[audioSrc]);
 
 
+    useEffect(() => {
+        console.log(playerStatus);
+        if(playerStatus === true) {
+            document.getElementById("a-cover-art").classList.add("a-rotate")
+        } else {
+            try {
+                document.getElementById("a-cover-art").classList.remove("a-rotate")
+            }catch{}
+        }
 
+    },[playerStatus])
 
     const handleMiniPlayerClick = () => {
-        setPlayerStatus(!playerStatus);
+        if(playerStatus === false){
+            audioTune.play();
+            setPlayerStatus(!playerStatus);
+            // document.getElementById("a-cover-art").classList.add("a-rotate")
+        } else {
+            try {
+                audioTune.pause();
+                setPlayerStatus(!playerStatus);
+                // document.getElementById("a-cover-art").classList.remove("a-rotate")
+
+            } catch {}
+
+        } 
     };
 
-    const handleMiniPlayerState = () => setPlayerMin(!playerMin);
+    const handleMiniPlayerState = () => setPlayerMin(playerMin);
 
     // useEffect(() => {
     //     console.log(playerStatus);
@@ -62,20 +84,19 @@ const Player = () => {
             { playerMin ?
                 <div className="o-player" onClick={handleMiniPlayerState}>
 
-                    {/* <div className="row">
+                    <div className="row">
                         <div className="col-3">
-                            <img src="https://i.redd.it/aayfot0hjwn21.png" title="cover-art" alt="cover-art" className="a-playerImg"></img>
+                            <img src={playerCover} title="cover-art" alt="cover-art" className="a-playerImg" id="a-cover-art"></img>
                         </div>
                         
                         <div className="col-6 m-currentTrackMiniPlayer">
-                            <span className="a-currentTrackMiniPlayer">Optimistic</span>
-                            <span className="a-currentAlbumMiniPlayer">Kid A</span>
+                            <span className="a-currentTrackMiniPlayer">{playerSong}</span>
+                            <span className="a-currentAlbumMiniPlayer">{playerArtist}</span>
                         </div>
-
                         <div className="col-3 m-playerIcon">
-                            <FontAwesomeIcon icon={!playerStatus ? faPause : faPlay} className="a-playLogo" onClick={handleMiniPlayerClick}/>
+                            <FontAwesomeIcon icon={playerStatus ? faPause : faPlay} className="a-playLogo" onClick={handleMiniPlayerClick}/>
                         </div>
-                    </div> */}
+                    </div>
 
                 {/* <Navigation/> */}
             </div>
@@ -108,7 +129,7 @@ const Player = () => {
                         <FontAwesomeIcon icon={faBackward} className="a-playLogo" onClick={handleMiniPlayerClick}/>
                     </div>
                     <div className="col-2 m-playLogo">
-                        <FontAwesomeIcon icon={!playerStatus ? faPause : faPlay} className="a-playLogo" onClick={handleMiniPlayerClick}/>
+                        <FontAwesomeIcon icon={playerStatus ? faPlay :faPause} className="a-playLogo" onClick={handleMiniPlayerClick}/>
                     </div>
                     <div className="col-2 m-playLogo">
                         <FontAwesomeIcon icon={faForward} className="a-playLogo" onClick={handleMiniPlayerClick}/>

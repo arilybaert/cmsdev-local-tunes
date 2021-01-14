@@ -10,9 +10,9 @@ import axios from 'axios';
 
 const Playlist = () => {
     // context
-    const { popupState, setPopupState} = useContext(LocalTunesContext);
+    const { popupState, setPopupState, setPlayerStatus} = useContext(LocalTunesContext);
     const { setAlbumTitle, setAlbumImage, setArtistTitle, artistTitle, albumImage } = useContext(LocalTunesContext);
-    const { setAudioSrc } = useContext(LocalTunesContext);
+    const { setAudioSrc, setPlayerSong, setPlayerArtist, setPlayerCover } = useContext(LocalTunesContext);
 
 
     // states
@@ -170,7 +170,13 @@ const Playlist = () => {
     const handleMenu = () => {
         setPopupState(!popupState);
     }
-    const setAudio = (id) => setAudioSrc(id);
+    const setAudio = (id, song, artist, cover) => {
+        setPlayerSong(song);
+        setPlayerArtist(artist);
+        setPlayerCover(cover);
+        setAudioSrc(id);
+        setPlayerStatus(true);
+    };
 
     return (
         <div>
@@ -179,11 +185,11 @@ const Playlist = () => {
 
                 { songs && songs.map((data, index) => 
                 // console.log(data)
-                    <div className="row m-songOveriew" key={index} onClick={() => setAudio(data.guid)}>
-                        <div className="col-2">
+                    <div className="row m-songOveriew" key={index} >
+                        <div className="col-2" onClick={() => setAudio(data.guid)}>
                             <img src={albumImage} alt="cover-art" title="cover-art" className="a-songOverviewImage"></img>
                         </div>
-                        <div className="col-6 m-songOveriewTitle">
+                        <div className="col-6 m-songOveriewTitle" onClick={() => setAudio(data.guid, data.post_title, artistTitle, albumImage)}>
                             <span className="a-songOveriewTitle">{data.post_title}</span>
                             <span className="a-songOveriewArtist">{artistTitle}</span>
                         </div>

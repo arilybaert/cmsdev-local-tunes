@@ -7,9 +7,9 @@ import * as Routes from '../routes';
 const Settings = () => {
     const history = useHistory();
     const [ allowUpload, setAllowUpload]= useState(false);
-    const [ uid, setUid ] = useState();
+    const [ setUid ] = useState();
     const apiUrlRole = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
-    const apiUrlRoleAdd = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/${uid}`;
+    // const apiUrlRoleAdd = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/${uid}`;
     const config = {
         method: 'POST',
         mode: 'no-cors',
@@ -34,6 +34,7 @@ const Settings = () => {
                 setAllowUpload(true)
             }
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[allowUpload]);
     
     const becomeArtist = () => {

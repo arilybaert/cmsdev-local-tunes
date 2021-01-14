@@ -40,7 +40,7 @@ const SongOverview = () => {
                     apiUrlAlbums,
                     config
                 ).then((res) => {
-                    arr.forEach(song => {
+                    arr && arr.forEach(song => {
                         res.data.forEach(album => {
                             album.acf.songs.forEach(songEl => {
                                 console.log(album);

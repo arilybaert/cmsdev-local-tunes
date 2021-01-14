@@ -31,7 +31,9 @@ const Genre = () => {
         axios.get(
             apiUrlGenreName,
             config
-        ).then((res) => setGenreTitle(res.data.title.rendered))
+        ).then((res) => {
+            console.log(res.data)
+            setGenreTitle(res.data.title.rendered)})
         .catch((res) => console.log(res));
     }
     const fetchAlbums = () => {
@@ -78,7 +80,7 @@ const Genre = () => {
                             <div className="m-releaseCard">
                                 <img src={data.acf.image.guid} alt="cover-art" title="cover-art" className="a-cardImg"></img>
                                 <span className="a-albumTitleHome">{data.acf.title}</span>
-                                <span className="a-albumArtistHome">{data.acf.artist}</span>
+                                <span className="a-albumArtistHome">{data.acf.artist.data.display_name}</span>
                             </div>
                         </Link>
                         )

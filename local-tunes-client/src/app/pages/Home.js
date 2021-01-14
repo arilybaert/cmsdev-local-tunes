@@ -13,15 +13,16 @@ const Home = () => {
     const { setCity, setLat, setLong, getDistance } = useContext(LocalTunesContext)
     const [recentAlbums, setRecentAlbums] = useState('');
     const [topAlbums, setTopAlbums] = useState('');
-    // var slider = document.getElementById("myRange");
-    // var output = document.getElementById("demo");
-    // output.innerHTML = slider.value; // Display the default slider value
+    /*
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value; // Display the default slider value
     
-    // // Update the current slider value (each time you drag the slider handle)
-    // slider.oninput = function() {
-    //   output.innerHTML = this.value;
-    // }
-
+    // Update the current slider value (each time you drag the slider handle)
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+    */
     const apiUrlRecentAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?order=desc&per_page=6`;
     const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?filter[orderby]=likes&order=desc`;
     // const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media/filter[orderby]=likes&order=desc`;
@@ -33,12 +34,18 @@ const Home = () => {
             // 'Authorization': `Bearer ${localStorage.getItem('login')}`,
         },
     };
-    
-    const fetchRecentAlbums = () => {
-        axios.get(
-            apiUrlRecentAlbums,
-            config,
-        ).then( (res) => {
+
+    const getLocation  = () => {
+
+        }
+    const setInfo = () => {
+        
+    }
+    useEffect(  () => {
+        /*
+        *** promise logic thanks to kobe deville <3333333
+        */ 
+        const p = new Promise((resolve) => {
             navigator.geolocation.getCurrentPosition( function(position) {
                 openGeocoder()
                     .reverse(position.coords.longitude, position.coords.latitude)
@@ -46,15 +53,47 @@ const Home = () => {
                         console.log(res.address.village);
                         setCity(res.address.village);
                     })
-                res.data.forEach(album => {
+                    recentAlbums && recentAlbums.forEach(album => {
                     album["distance"] = getDistance(position.coords.latitude, position.coords.longitude, album.acf.latitude, album.acf.longitude)
                 });
-            });
-            res.data.sort( function (a, b) {
+                resolve();
+            })
+        });
+        p.then(() => {
+            recentAlbums && recentAlbums.sort( function (a, b) {
                 console.log(a.distance);
                 return a.distance - b.distance;
             });
-            console.log(res.data);
+            setRecentAlbums(recentAlbums);
+        })
+
+    },[recentAlbums]);
+
+
+
+
+
+
+
+    useEffect(()=> {
+        console.log(recentAlbums);
+    //     if (arr.length > 0) {
+
+    //     arr && arr.sort( function (a, b) {
+    //         console.log(a.distance);
+    //         return a.distance - b.distance;
+    //     });
+    // }
+
+    }, [recentAlbums]);
+
+
+    const fetchRecentAlbums = () => {
+        axios.get(
+            apiUrlRecentAlbums,
+            config,
+        ).then( (res) => {
+
             setRecentAlbums(res.data);
             axios.get()
         }).catch((err) => {
