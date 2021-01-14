@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { HeaderContainer, Navigation} from '../components';
+import React, { useContext, useEffect, useState } from 'react';
+import { HeaderContainer, LocalTunesContext, Navigation} from '../components';
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import openGeocoder from 'node-open-geocoder';
+
 
 
 
 
 const Home = () => {
 
-
+    const { setCity, setLat, setLong, getDistance } = useContext(LocalTunesContext)
     const [recentAlbums, setRecentAlbums] = useState('');
     const [topAlbums, setTopAlbums] = useState('');
     // var slider = document.getElementById("myRange");
@@ -36,7 +38,22 @@ const Home = () => {
         axios.get(
             apiUrlRecentAlbums,
             config,
-        ).then((res) => {
+        ).then( (res) => {
+            navigator.geolocation.getCurrentPosition( function(position) {
+                openGeocoder()
+                    .reverse(position.coords.longitude, position.coords.latitude)
+                    .end((err, res) => {
+                        console.log(res.address.village);
+                        setCity(res.address.village);
+                    })
+                res.data.forEach(album => {
+                    album["distance"] = getDistance(position.coords.latitude, position.coords.longitude, album.acf.latitude, album.acf.longitude)
+                });
+            });
+            res.data.sort( function (a, b) {
+                console.log(a.distance);
+                return a.distance - b.distance;
+            });
             console.log(res.data);
             setRecentAlbums(res.data);
             axios.get()
@@ -58,9 +75,9 @@ const Home = () => {
     }
     useEffect(() => {
         fetchRecentAlbums();
-        fetchTopAlbums();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[]);
+        // fetchTopAlbums();
+        
+        }, []);
 
 
     return (

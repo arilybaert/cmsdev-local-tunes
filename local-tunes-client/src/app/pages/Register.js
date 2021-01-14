@@ -28,10 +28,10 @@ const Register = () => {
           [event.target.name]: value
         });
     }
-    const apiUrlCreate = 'http://www.local-tunes-server.test/wp-json/jwt-auth/v1/token';
-    const apiUrlRegister = 'http://www.local-tunes-server.test/wp-json/wp/v2/users/register';
-    const apiUrlCreateLikedSongs = 'http://www.local-tunes-server.test/wp-json/wp/v2/songs/';
-    const apiUrlUpdateUser = 'http://www.local-tunes-server.test/wp-json/wp/v2/users/';
+    const apiUrlCreate = `${process.env.REACT_APP_URL}/wp-json/jwt-auth/v1/token`;
+    const apiUrlRegister = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/register`;
+    const apiUrlCreateLikedSongs = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs/`;
+    const apiUrlUpdateUser = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/`;
 
     let uid;
     const userCreate = async (username, email, password, role, config, url) => {

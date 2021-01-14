@@ -1,16 +1,52 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
 import {HeaderContainer, Player} from '../components';
 import * as Routes from '../routes';
 
 const Settings = () => {
     const history = useHistory();
+    const [ allowUpload, setAllowUpload]= useState(false);
+    const [ uid, setUid ] = useState();
+    const apiUrlRole = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
+    const apiUrlRoleAdd = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/${uid}`;
+    const config = {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 
+            'Authorization': `Bearer ${localStorage.getItem('login')}`,
+        },
+    }
 
     const handleLogout = () => {
         localStorage.setItem( 'login', '' );
-
         history.push(Routes.LOGIN);
         window.location.reload();
+    }
+
+     useEffect(()=> {
+        axios.get(
+            apiUrlRole,
+            config
+        ).then((res) => {
+            setUid(res.data.id);
+            if (res.data.roles.includes("contributor")){
+                setAllowUpload(true)
+            }
+        });
+    },[allowUpload]);
+    
+    const becomeArtist = () => {
+        const data = {
+            "roles": ["contributor", "subscriber"]
+        }
+        axios.post(
+            apiUrlRole,
+            data,
+            config
+        ).then((res)=>{
+            setAllowUpload(true)
+        })
     }
     return (
         <div>
@@ -19,9 +55,19 @@ const Settings = () => {
 
             <div className="o-settings">
                 <div className="row m-settings">
-                    <Link to={Routes.UPLOAD} className="col-12">
-                        <span className="a-settingItem">Upload</span>
-                    </Link>
+                    {
+                        allowUpload &&
+                            <Link to={Routes.UPLOAD} className="col-12">
+                                <span className="a-settingItem">Upload</span>
+                            </Link>
+                    }
+                    {
+                        !allowUpload &&
+                        <div  className="col-12" onClick={becomeArtist}>
+                            <span className="a-settingItem">Become artist</span>
+                        </div>
+                    }
+
                 </div>
                 
                 <Link to={Routes.CHANGEPASS} className="row m-settings">

@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {HeaderContainer} from '../components';
+import React, {useContext, useEffect, useState} from 'react';
+import {HeaderContainer, LocalTunesContext} from '../components';
 import axios from 'axios';
+import openGeocoder from 'node-open-geocoder';
+
 
 const Upload = () => {
-
     const [form, setForm] = useState({
         artist: "",
         album: "",
@@ -30,7 +31,19 @@ const Upload = () => {
             'Authorization': `Bearer ${localStorage.getItem('login')}`,
         },
     };
+    let lat;
+    let long;
 
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition( function(position) {
+            localStorage.setItem("lat", position.coords.latitude)
+            localStorage.setItem("long", position.coords.longitude)
+        })
+    },[])
+
+
+
+        
     // get artist id
     useEffect(() => {
         axios.get(
@@ -59,6 +72,7 @@ const Upload = () => {
         fetchGenres();
     })
     const uploadAlbumInformation = async () => {
+        console.log(localStorage.getItem("lat"))
         const data = {
             "title": form.album,
             "fields": {
@@ -66,7 +80,9 @@ const Upload = () => {
                 "artist": uid,
                 "songs": songIDs,
                 "image": imgID,
-                "genre": form.genre
+                "genre": form.genre,
+                "latitude": localStorage.getItem("lat"),
+                "longitude": localStorage.getItem("long")
             },
             "status": "publish"
         };

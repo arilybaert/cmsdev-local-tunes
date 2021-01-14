@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 
 import * as Routes from '../../routes';
+import { LocalTunesContext } from '../context';
 
 const HomeContent = () => {
-
+    const { city } = useContext(LocalTunesContext);
     const handleDistance = (event) => {
         console.log(event.target.value);
     }
@@ -22,7 +23,7 @@ const HomeContent = () => {
                     <span>
                         <FontAwesomeIcon icon={faMapMarkerAlt} className="a-locationLogo"/>
                     </span>
-                    <span className="a-locationCurrent">Brussels</span>
+                    <span className="a-locationCurrent">{city && city}</span>
                 </div>
                 <Link to={Routes.SETTINGS} className="col-4 m-settings">
                     <FontAwesomeIcon icon={faCog} className="a-settingsLogo"/>
