@@ -1,6 +1,6 @@
  <?php
  add_filter( 'rest_albums_query', function( $args ) {
-	$fields = array( 'genre' );
+	$fields = array( 'genre', 'songs' );
 
 	foreach ( $fields as $field ) {
 			if ( isset( $_GET[ $field ] ) && ! empty( $_GET[ $field ] ) ) {
@@ -12,6 +12,7 @@
 	}
 	return $args; 
 } );
+
 
 function my_customize_rest_cors() {
 	remove_filter( 'rest_pre_serve_request', 'rest_send_cors_headers' );
@@ -46,6 +47,18 @@ function get_rest_featured_image( $object, $field_name, $request ) {
 
 add_action('rest_api_init', 'register_rest_images' );
 add_action( 'rest_api_init', 'my_customize_rest_cors', 15 );
-
+function get_user_roles($object, $field_name, $request) {
+	return get_userdata($object['id'])->roles;
+  }
+  
+  add_action('rest_api_init', function() {
+	register_rest_field('user', 'roles', array(
+	  'get_callback' => 'get_user_roles',
+	  'update_callback' => null,
+	  'schema' => array(
+		'type' => 'array'
+	  )
+	));
+  });
 
 ?>
