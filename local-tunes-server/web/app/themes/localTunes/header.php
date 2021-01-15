@@ -7,6 +7,7 @@
     <?php wp_head() ;?>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* General */
         * {
             margin: 0 1rem;
             padding: 0;
@@ -15,6 +16,7 @@
         body {
             background-color: white;
         }
+        /* header  */
         header {
             background-color: blueviolet;
             padding: 1rem;
@@ -25,6 +27,8 @@
             background-color: #23B1FF;
             color: white;
         }
+
+        /* links */
         a:link {
             color: white;
             text-decoration: none;
@@ -46,6 +50,8 @@
         a.a-appLink:link { 
             color: #23B1FF;
         }
+
+        /* links */
         .o-post {
             margin-top: 2rem;
             display: flex;
@@ -59,6 +65,9 @@
             border-radius: 7px;
             margin-top: 1rem;
             font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
         }
         h3 {
@@ -66,10 +75,15 @@
             margin: 1rem;
             font-size: 16pt;
         }
+        .a-post-image {
+            width: 50%;
+        }
         p {
             margin: 1rem;
             text-align: center;
         }
+
+        /* main  */
         .o-main {
             display: flex;
         }
@@ -105,6 +119,8 @@
             text-align: center;
             font-weight: 900;
         }
+
+        /* footer */
 
         footer {
             background-color: #FFF795;

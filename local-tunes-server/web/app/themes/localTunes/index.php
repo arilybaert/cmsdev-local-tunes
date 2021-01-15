@@ -17,6 +17,7 @@
         ?>
             <article class="m-post">
                 <h3><?php the_title(); ?></h3>
+                <img class="a-post-image" src="<?php the_field('image'); ?>" />
                 <?php the_excerpt(); ?>
             </article>
             <?php 
