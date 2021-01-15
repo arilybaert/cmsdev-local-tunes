@@ -11,7 +11,9 @@
             margin: 0 1rem;
             padding: 0;
             font-family: Arial, Helvetica, sans-serif;
-
+        }
+        body {
+            background-color: white;
         }
         header {
             background-color: blueviolet;
@@ -20,24 +22,29 @@
             font-weight: 800;
             text-align: center;
             border-radius: 9px;
+            background-color: #23B1FF;
+            color: white;
         }
         a:link {
             color: white;
             text-decoration: none;
         }
         a:visited {
-        color: white;
+            color: white;
         text-decoration: none;
         }
 
         a:hover {
-        color: white;
+            color: white;
         text-decoration: none;
         }
 
         a:active {
-        color: white;
+            color: white;
         text-decoration: none;
+        }
+        a.a-appLink:link { 
+            color: #23B1FF;
         }
         .o-post {
             margin-top: 2rem;
@@ -45,11 +52,14 @@
             justify-content: space-between;
         }
         .m-post {
-            box-shadow: 3px 4px 13px 1px rgba(0,0,0,0.43);
+            /* box-shadow: 3px 4px 13px 1px rgba(0,0,0,0.43); */
+            background-color: #23B1FF;
+            color: #FFF795;
             width: 28%;
             border-radius: 7px;
             margin-top: 1rem;
             font-family: 'Times New Roman', Times, serif;
+
         }
         h3 {
             text-align: center;
@@ -80,15 +90,32 @@
         }
         .a-subTitle {
             font-size: 27pt;
-            font-weight: 9s00;
+            font-weight: 900;
+            color: #23B1FF;
+        }
+        a.a-appLink:hover { 
+            color: #23B1FF;
         }
         .a-appLink {
-            background-color: blueviolet;
+            background-color: #FFF795;
+            color: #23B1FF;
             padding: 1rem;
             border-radius: 9px;
             margin-top: 1rem;
             text-align: center;
             font-weight: 900;
+        }
+
+        footer {
+            background-color: #FFF795;
+            color: #23B1FF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 9px;
+
         }
 
     </style>
