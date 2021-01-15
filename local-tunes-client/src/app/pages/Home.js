@@ -13,6 +13,7 @@ const Home = () => {
     const { setCity, setLat, setLong, getDistance } = useContext(LocalTunesContext)
     const [recentAlbums, setRecentAlbums] = useState('');
     const [topAlbums, setTopAlbums] = useState('');
+    const [ finalAlbums, setRecentFinalAlbums] = useState([]);
     /*
     var slider = document.getElementById("myRange");
     var output = document.getElementById("demo");
@@ -35,22 +36,18 @@ const Home = () => {
         },
     };
 
-    const getLocation  = () => {
-
-        }
-    const setInfo = () => {
-        
-    }
     useEffect(  () => {
+
         /*
         *** promise logic thanks to kobe deville <3333333
         */ 
+
+
         const p = new Promise((resolve) => {
             navigator.geolocation.getCurrentPosition( function(position) {
                 openGeocoder()
                     .reverse(position.coords.longitude, position.coords.latitude)
                     .end((err, res) => {
-                        console.log(res.address.village);
                         setCity(res.address.village);
                     })
                     recentAlbums && recentAlbums.forEach(album => {
@@ -61,12 +58,13 @@ const Home = () => {
         });
         p.then(() => {
             recentAlbums && recentAlbums.sort( function (a, b) {
-                console.log(a.distance);
                 return a.distance - b.distance;
             });
-            setRecentAlbums(recentAlbums);
+            if(recentAlbums.length > 0) {
+                setRecentFinalAlbums(recentAlbums); 
+            }
         })
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[recentAlbums]);
 
 
@@ -74,17 +72,8 @@ const Home = () => {
 
 
 
-
     useEffect(()=> {
-        console.log(recentAlbums);
-    //     if (arr.length > 0) {
-
-    //     arr && arr.sort( function (a, b) {
-    //         console.log(a.distance);
-    //         return a.distance - b.distance;
-    //     });
-    // }
-
+        // console.log(recentAlbums);
     }, [recentAlbums]);
 
 
@@ -113,9 +102,9 @@ const Home = () => {
         });
     }
     useEffect(() => {
-        fetchRecentAlbums();
         // fetchTopAlbums();
-        
+        fetchRecentAlbums();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
 
 
@@ -125,7 +114,7 @@ const Home = () => {
 
             <div className="row o-homeSection">
                 <div className="col-12 a-homeSectionTitle">All New Release</div>
-                { recentAlbums && recentAlbums.map((data, index) => 
+                { finalAlbums && finalAlbums.map((data, index) => 
                     <Link to={`/album/${data.id}`} className="col-4 col-md-3 o-releaseCard" key={index}>
                         <div className="m-releaseCard">
                             <img src={data.acf.image.guid} alt="cover-art" title="cover-art" className="a-cardImg"></img>

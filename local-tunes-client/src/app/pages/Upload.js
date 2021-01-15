@@ -114,7 +114,8 @@ const Upload = () => {
             console.log(err.response.data.message);
         })
     }
-    const uploadsongs = (songs) => {        // Loop throug songs and upload them one by one
+    // Loop throug songs and upload them one by one
+    const uploadsongs = (songs) => { 
         Array.from(songs.files).forEach( async (f, i) => { 
             const formData = new FormData();
             formData.set("file", f);
@@ -128,8 +129,7 @@ const Upload = () => {
                 console.log(songIDs);
                 if(i === songs.files.length-1) {
                     const coverart = document.getElementById("a-cover-art"); // find selected cover art
-                    uploadImg(coverart);  // sorry for the ghetto solution 
-
+                    uploadImg(coverart);  
                 }
 
 
