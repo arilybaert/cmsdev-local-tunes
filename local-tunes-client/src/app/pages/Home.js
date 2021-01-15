@@ -10,10 +10,11 @@ import openGeocoder from 'node-open-geocoder';
 
 const Home = () => {
 
-    const { setCity, setLat, setLong, getDistance } = useContext(LocalTunesContext)
+    const { setCity, setLat, setLong, getDistance, value, setValue } = useContext(LocalTunesContext)
     const [recentAlbums, setRecentAlbums] = useState('');
     const [topAlbums, setTopAlbums] = useState('');
     const [ finalAlbums, setRecentFinalAlbums] = useState([]);
+    const [ removedAlbums, setRemovedAlbums] = useState([]);
     /*
     var slider = document.getElementById("myRange");
     var output = document.getElementById("demo");
@@ -61,7 +62,9 @@ const Home = () => {
                 return a.distance - b.distance;
             });
             if(recentAlbums.length > 0) {
-                setRecentFinalAlbums(recentAlbums); 
+                setRecentFinalAlbums(recentAlbums);
+                setValue(50);
+
             }
         })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,7 +73,31 @@ const Home = () => {
 
 
 
-
+useEffect(() => {
+    const arr = []
+    if(finalAlbums.length > 0) {
+        finalAlbums.forEach((album, index) => {
+            console.log(album.distance)
+            if(album.distance > value) {
+                arr.push(finalAlbums[index]);
+                finalAlbums.splice(index, 1)
+                
+            }
+        })
+        setRemovedAlbums(arr);
+        setRecentFinalAlbums(finalAlbums);
+    }
+    const array = finalAlbums;
+    if(removedAlbums.length > 0) {
+        removedAlbums.forEach((album, index) => {
+            console.log(album);
+            if(album.distance < value) {
+                array.push(album[index])
+            }
+        })
+        setRecentFinalAlbums(array);
+    }
+},[value])
 
     useEffect(()=> {
         // console.log(recentAlbums);

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext,  } from 'react';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,9 +8,10 @@ import * as Routes from '../../routes';
 import { LocalTunesContext } from '../context';
 
 const HomeContent = () => {
-    const { city } = useContext(LocalTunesContext);
+    const { city, value, setValue } = useContext(LocalTunesContext);
     const handleDistance = (event) => {
         console.log(event.target.value);
+        setValue(event.target.value);
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -29,7 +30,7 @@ const HomeContent = () => {
                     <FontAwesomeIcon icon={faCog} className="a-settingsLogo"/>
                 </Link>
                 <form className="col-12 m-slider" onSubmit={handleSubmit}>
-                    <input type="range" min="1" max="100" value="50" className="a-slider" id="myRange" onChange={handleDistance}></input>    
+                    <input type="range" min="1" max="100" value={value} className="a-slider" id="myRange" onChange={handleDistance}></input>    
                 <span id="demo"></span>
                 </form>
             </div>

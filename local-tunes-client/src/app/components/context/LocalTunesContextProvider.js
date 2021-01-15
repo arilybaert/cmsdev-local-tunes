@@ -51,9 +51,10 @@ const LocalTunesContextProvider = ({children}) => {
         return d;
       };
 
-      
+      const [ value, setValue ] = useState(50);
+
     return (
-        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus }}>
+        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus, value, setValue }}>
 
             {children}
 
