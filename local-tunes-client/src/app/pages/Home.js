@@ -12,7 +12,7 @@ import * as Routes from '../routes';
 const Home = () => {
 
     const history = useHistory();
-    const { setCity, setLat, setLong, getDistance, value, setValue, verifyUser } = useContext(LocalTunesContext)
+    const { setCity, getDistance, value, setValue, verifyUser, cookies } = useContext(LocalTunesContext)
     const [recentAlbums, setRecentAlbums] = useState('');
     const [topAlbums, setTopAlbums] = useState('');
     const [ finalAlbums, setRecentFinalAlbums] = useState([]);
@@ -28,7 +28,6 @@ const Home = () => {
     }
     */
 
-   console.log(verifyUser());
    if(verifyUser() === false) {
        history.push(Routes.LOGIN)
    }
@@ -48,7 +47,7 @@ const Home = () => {
         /*
         *** promise logic thanks to kobe deville <3333333
         */ 
-
+        console.log(cookies.limit);
 
         const p = new Promise((resolve) => {
             navigator.geolocation.getCurrentPosition( function(position) {

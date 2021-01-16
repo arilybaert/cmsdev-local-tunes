@@ -9,9 +9,13 @@
     backdrop-filter: blur(10px);  
     border-radius: 15px 15px 0 0 ;
 
+    .m-cover-art {
+        display: flex;
+        justify-content: center;
+    }
     .a-playerImg {
         padding: 15px;
-        width: 100%;
+        width: 10vh;
         border-radius: 50%;
         object-fit: cover;
     }

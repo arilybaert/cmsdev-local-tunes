@@ -10,7 +10,7 @@ const Player = () => {
 
     const [ playerMin, setPlayerMin ] = useState(true);
 
-    const { audioSrc, playerSong, playerArtist, playerCover, playerStatus, setPlayerStatus } = useContext(LocalTunesContext);
+    const { cookies, setCookie, audioSrc, playerSong, playerArtist, playerCover, playerStatus, setPlayerStatus } = useContext(LocalTunesContext);
 
     const [ audioTune, setAudioTune ] = useState();
 
@@ -24,8 +24,16 @@ const Player = () => {
 
         const audio = new Audio(audioSrc);
         if(audio.src.length > 0) {
-            audio.play();
-            setAudioTune(audio);
+            if (parseInt(cookies.limit) === 5){
+                setPlayerStatus(!playerStatus);
+                window.confirm("you need a subscription to play more than 5 songs a day")
+            } else {
+                audio.play();
+                setAudioTune(audio);
+                setCookie("limit", parseInt(cookies.limit)+1, {
+                    path: "/"
+                  });
+            }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[audioSrc]);
@@ -81,11 +89,12 @@ const Player = () => {
 
 
         <div>
-            { playerMin ?
+            
+            {/* { playerMin ? */}
                 <div className="o-player" onClick={handleMiniPlayerState}>
 
                     <div className="row">
-                        <div className="col-3">
+                        <div className="col-3 m-cover-art">
                             {playerCover.length > 0? 
                             <img src={playerCover} title="cover-art" alt="cover-art" className="a-playerImg" id="a-cover-art"></img>
                             :
@@ -104,6 +113,7 @@ const Player = () => {
 
                 {/* <Navigation/> */}
             </div>
+            {/*
             :
 
             <div  className="o-playerMax">
@@ -143,6 +153,7 @@ const Player = () => {
 
             </div>
             }
+        */}
         </div>
 
 )

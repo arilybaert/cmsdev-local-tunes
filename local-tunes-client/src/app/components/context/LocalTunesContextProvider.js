@@ -5,7 +5,7 @@ import * as jwt  from "jsonwebtoken";
 const LocalTunesContext = createContext();
 
 const LocalTunesContextProvider = ({children}) => {
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["user", "limit"]);
     const [ collectionHeader, setCollectionHeader ] = useState("playlists");
 
     const [ audioSrc, setAudioSrc ] = useState();
@@ -26,6 +26,7 @@ const LocalTunesContextProvider = ({children}) => {
     const [searchTerm, setSearchTerm] = useState();
 
     const [ login, setLogin ] = useState();
+    const [ uid, setUid ] = useState();
 
     const [ lat, setLat ] = useState();
     const [ long, setLong ] = useState();
@@ -59,9 +60,10 @@ const LocalTunesContextProvider = ({children}) => {
 
         const token = cookies.login
         try {
-          let value = 'elo';
+          let value = '';
             const decoded = jwt.verify(token, 'Vd9qWVP<M1 -N+#0U]By3wor#>2mJae|JE)ofqL48p-@K.k3c5hQ#ld`jf$0D-ng');
             if(Date.now() <= decoded.exp * 1000) {
+              setUid(decoded.data.user.id);
                 value =  true;
             }
             return value;
@@ -72,7 +74,7 @@ const LocalTunesContextProvider = ({children}) => {
 
    };
     return (
-        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus, value, setValue, verifyUser, cookies, setCookie, removeCookie }}>
+        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus, value, setValue, verifyUser, cookies, setCookie, removeCookie, setUid, uid }}>
 
             {children}
 

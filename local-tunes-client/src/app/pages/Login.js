@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const Login = () => {
     const history = useHistory();
-    const {setCookie, verifyUser } = useContext(LocalTunesContext);
+    const {setCookie, verifyUser, cookies } = useContext(LocalTunesContext);
 
     const [error, setError]= useState(false);
     const [errorMsg, setErrorMsg] = useState();
@@ -16,7 +16,7 @@ const Login = () => {
         username: "",
         password: "",
     });
-    console.log(verifyUser());
+
     if(verifyUser() === true) {
         history.push(Routes.HOME)
     }
@@ -27,12 +27,21 @@ const Login = () => {
           [event.target.name]: value
         });
     }
-    const apiUrl = 'http://www.local-tunes-server.test/wp-json/jwt-auth/v1/token';
+    const apiUrl = `${process.env.REACT_APP_URL}/wp-json/jwt-auth/v1/token`;
+    
     const handleCookie = (token) => {
         setCookie("login", token, {
           path: "/"
         });
       }
+    const limitCookie = () => {
+        let date = new Date();
+        date.setTime(date.getTime() + 12 * 3600 * 1000);
+        const expires = "; expires=" + date.toUTCString();
+        setCookie("limit", "0", expires, {
+            path: "/"
+          });
+    }
     const handleSubmit = ( e ) => {
         e.preventDefault();
 
@@ -51,7 +60,6 @@ const Login = () => {
             "password": form.password
         };
 
-        console.log(bodyParameters);
         axios.post(
             apiUrl,
             bodyParameters,
@@ -63,11 +71,16 @@ const Login = () => {
                 const p = new Promise((resolve) => {
                     handleCookie(data.token);
                     localStorage.setItem('login', data.token);
-                    
+                    console.log(cookies.limit);
+                    if(cookies.limit === undefined){
+                        limitCookie();
+                    }
+
                     resolve();
                 });
                 p.then(() => {
                     history.push(Routes.HOME);
+                    window.location.reload();
                 })
 
 
