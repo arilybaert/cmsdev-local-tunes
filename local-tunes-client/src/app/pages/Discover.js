@@ -10,12 +10,34 @@ const Discover = () => {
     const { searchTerm } = useContext(LocalTunesContext);
     const [ searchState, setSearchState ] = useState(false);
     const [ genres, setGenres ] = useState();
+    const [ searchAlbumResults, setSearchAlbumResults ] = useState();
+    const [ searchSongResults, setSearchSongResults ] = useState();
 
+    const apiUrlSearch = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?search=`;
+    const apiUrlSearchSong = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media?media_type=audio&search=`;
+
+    const searchSongs = (term) => {
+        axios.get(
+            apiUrlSearchSong + term,
+            config
+        ).then((res) => {
+            setSearchSongResults(res.data);
+        })
+    }
+    const searchAlbums = (term) => {
+        axios.get(
+            apiUrlSearch + term,
+            config
+        ).then((res) => {
+            setSearchAlbumResults(res.data);
+        })
+    }
     useEffect(() => {
         if(searchTerm !== undefined  ) {
-            console.log('length: ' + searchTerm.length);
             if(searchTerm.length > 0){
                 setSearchState(true);
+                searchAlbums(searchTerm);
+                searchSongs(searchTerm);
             } else {
                 setSearchState(false);
             }
@@ -41,7 +63,6 @@ const Discover = () => {
             apiUrl,
             config,
         ).then((res) => {
-            console.log(res.data);
             setGenres(res.data);
         }).catch((err) => {
             console.log(err.response.data.message);
@@ -61,65 +82,51 @@ const Discover = () => {
             {searchState ? 
                 <div className="o-searchResults row">
                     <div className="col-12 m-resultsTitle">
-                        Songs
+                        Albums
                     </div>
                     <div className="col-12">
-                        <div className="row o-songResult">
-                            <div className="col-2">
-                                <img alt="cover-img" title="cover-imn" src="https://img.discogs.com/PIulSZS_u-46lzW--booobYYKtY=/fit-in/598x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-667897-1434632375-4358.jpeg.jpg" className="a-searchResultSongImg"></img>
-                            </div>
-                            <div className="col-7 m-resultSongInfo">
-                                <span className="a-resultSongTitle">Under the bridge</span>
-                                <span className="a-resultSongArtist">Red Hot Chili Peppers</span>
-                            </div>
-                            <div className="col-3 m-searchresultIcon">
-                                <FontAwesomeIcon icon={faHeart} className="a-DiscoverHeart" id="search"/>
-                            </div>
-                        </div>
 
-                        <div className="row o-songResult">
-                            <div className="col-2">
-                                <img alt="cover-img" title="cover-imn" src="https://img.discogs.com/PIulSZS_u-46lzW--booobYYKtY=/fit-in/598x600/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-667897-1434632375-4358.jpeg.jpg" className="a-searchResultSongImg"></img>
-                            </div>
-                            <div className="col-7 m-resultSongInfo">
-                                <span className="a-resultSongTitle">Under the bridge</span>
-                                <span className="a-resultSongArtist">Red Hot Chili Peppers</span>
-                            </div>
-                            <div className="col-3 m-searchresultIcon">
-                                <FontAwesomeIcon icon={faHeart} className="a-DiscoverHeart" id="search"/>
-                            </div>
-                        </div>
+                    {
+                        searchAlbumResults && searchAlbumResults.map((data, index) => 
+                            <Link to={`/album/${data.id}`} className="row o-songResult" key={index}>
+                                <div className="col-2">
+                                    <img alt="cover-img" title="cover-imn" src={data.acf.image.guid} className="a-searchResultSongImg"></img>
+                                </div>
+                                <div className="col-7 m-resultSongInfo">
+                                    <span className="a-resultSongTitle">{data.title.rendered}</span>
+                                    <span className="a-resultSongArtist">{data.acf.artist.data.display_name}</span>
+                                </div>
+                                <div className="col-3 m-searchresultIcon">
+                                    <FontAwesomeIcon icon={faHeart} className="a-DiscoverHeart" id="search"/>
+                                </div>
+                            </Link>
+                        )}
+                        
 
 
                     </div>
 
                     <div className="col-12 m-resultsTitle">
-                        Artist
+                        Songs
                     </div>
                     <div className="col-12">
-                        <div className="row o-songResult">
-                            <div className="col-2">
-                                <img alt="cover-img" title="cover-imn" src="https://www.metalzone.fr/wp-content/uploads/2019/09/Red-Hot-Chili-Peppers-1200x727.jpg" className="a-searchResultArtist"></img>
-                            </div>
-                            <div className="col-7">
-                                <span>Red Hot Chili Peppers</span>
-                            </div>
-                            <div className="col-3 m-searchresultIcon">
-                                <FontAwesomeIcon icon={faHeart} className="a-DiscoverHeart" id="search"/>
-                            </div>
-                        </div>
 
-                        <div className="row o-songResult">
-                            <div className="col-2">
-                                <img alt="cover-img" title="cover-imn" src="https://www.metalzone.fr/wp-content/uploads/2019/09/Red-Hot-Chili-Peppers-1200x727.jpg" className="a-searchResultArtist"></img>
-                            </div>
-                            <div className="col-7">
-                                <span>Red Hot Chili Peppers</span>
-                            </div>
-                            <div className="col-3 m-searchresultIcon">
-                                <FontAwesomeIcon icon={faHeart} className="a-DiscoverHeart" id="search"/>
-                            </div>
-                        </div>
+                        {
+                            searchSongResults && searchSongResults.map((data, index) => 
+                                <div className="row o-songResult" key={index}>
+                                    <div className="col-2">
+                                        <img alt="cover-img" title="cover-imn" src="https://www.metalzone.fr/wp-content/uploads/2019/09/Red-Hot-Chili-Peppers-1200x727.jpg" className="a-searchResultArtist"></img>
+                                    </div>
+                                    <div className="col-7">
+                                        <span>{data.title.rendered}</span>
+                                    </div>
+                                    <div className="col-3 m-searchresultIcon">
+                                        <FontAwesomeIcon icon={faHeart} className="a-DiscoverHeart" id="search"/>
+                                    </div>
+                                </div>
+                            )
+                        }
+
                     </div>
                 </div>
 

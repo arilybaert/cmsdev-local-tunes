@@ -11,7 +11,7 @@ const Genre = () => {
     const {setGenreTitle, discoverState} = useContext(LocalTunesContext);
     const {genre} = useParams();
     const apiUrlGenre = `${process.env.REACT_APP_URL}/wp-json/acf/v3/albums/?genre=${genre}`;
-    const apiUrlGenreName = `${process.env.REACT_APP_URL}/wp-json/wp/v2/genres/${genre}`
+    const apiUrlGenreName = `${process.env.REACT_APP_URL}/wp-json/wp/v2/genres/${genre}`;
 
     const config = {
         method: 'GET',
@@ -20,11 +20,14 @@ const Genre = () => {
 
     useEffect(() => {
         console.log(discoverState);
+        // searchMusic
+        // fetch music
     },[discoverState]);
 
     // useEffect(() => {
     //     setGenreTitle(genreName);
     // });
+
 
 
     const fetchGenre = () => {

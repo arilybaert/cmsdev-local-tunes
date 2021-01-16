@@ -1,5 +1,5 @@
-import React, { useState} from 'react';
-import { Header } from '../components/';
+import React, { useContext, useState} from 'react';
+import { Header, LocalTunesContext } from '../components/';
 import * as Routes from '../routes';
 import { useHistory } from "react-router-dom";
 
@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const Register = () => {
     const history = useHistory();
+    const {setCookie } = useContext(LocalTunesContext);
     const [error, setError]= useState(false);
     const [errorMsg, setErrorMsg] = useState();
     const [form, setForm] = useState({
@@ -21,6 +22,11 @@ const Register = () => {
         mode: 'cors',
     };
 
+    const handleCookie = (token) => {
+        setCookie("login", token, {
+          path: "/"
+        });
+      }
     const handleChange = (event) => {
         const value = event.target.value;
         setForm({
@@ -77,7 +83,8 @@ const Register = () => {
         .then( async function  (response) {
             if ( response.status === 200 ) {
                 const data = response.data;
-                localStorage.setItem( 'login', data.token );
+                handleCookie(data.token);
+                localStorage.setItem('login', data.token);
 
                 const config = {
                     method: 'POST',
@@ -106,11 +113,12 @@ const Register = () => {
                     config
                 )
                 history.push(Routes.HOME);
-                window.location.reload();
             }
         })
 
         .catch((error) => {
+            console.log(error);
+
             // strip htlm tags for client friendly error
             function strip_html_tags(str) {
                 if ((str===null) || (str===''))

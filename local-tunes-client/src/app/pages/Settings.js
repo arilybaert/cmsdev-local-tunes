@@ -1,14 +1,15 @@
 import axios from 'axios';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import {HeaderContainer, Player} from '../components';
+import {HeaderContainer, LocalTunesContext, Player} from '../components';
 import * as Routes from '../routes';
 
 const Settings = () => {
     const history = useHistory();
+    const { removeCookie } = useContext(LocalTunesContext)
     const [ allowUpload, setAllowUpload]= useState(false);
-    const [ setUid ] = useState();
-    const apiUrlRole = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
+    const [ uid, setUid ] = useState();
+    const apiUrlRole = `${process.env.REACT_APP_URL}wp-json/wp/v2/users/me`;
     // const apiUrlRoleAdd = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/${uid}`;
     const config = {
         method: 'POST',
@@ -19,9 +20,11 @@ const Settings = () => {
     }
 
     const handleLogout = () => {
-        localStorage.setItem( 'login', '' );
-        history.push(Routes.LOGIN);
-        window.location.reload();
+        console.log("logout");
+        removeCookie("login", {
+            path: "/"
+          });
+        history.push(Routes.LOGIN)
     }
 
      useEffect(()=> {

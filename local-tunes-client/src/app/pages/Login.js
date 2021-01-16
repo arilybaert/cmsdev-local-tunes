@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Header } from '../components/';
+import React, { useState, useContext } from 'react';
+import { Header, LocalTunesContext } from '../components/';
 import * as Routes from '../routes';
 import { useHistory } from "react-router-dom";
 
@@ -8,12 +8,18 @@ import axios from 'axios';
 
 const Login = () => {
     const history = useHistory();
+    const {setCookie, verifyUser } = useContext(LocalTunesContext);
+
     const [error, setError]= useState(false);
     const [errorMsg, setErrorMsg] = useState();
     const [form, setForm] = useState({
         username: "",
         password: "",
     });
+    console.log(verifyUser());
+    if(verifyUser() === true) {
+        history.push(Routes.HOME)
+    }
     const handleChange = (event) => {
         const value = event.target.value;
         setForm({
@@ -22,7 +28,11 @@ const Login = () => {
         });
     }
     const apiUrl = 'http://www.local-tunes-server.test/wp-json/jwt-auth/v1/token';
-
+    const handleCookie = (token) => {
+        setCookie("login", token, {
+          path: "/"
+        });
+      }
     const handleSubmit = ( e ) => {
         e.preventDefault();
 
@@ -49,16 +59,21 @@ const Login = () => {
         .then(function (response) {
             if ( response.status === 200 ) {
                 const data = response.data;
-                localStorage.setItem( 'login', data.token );
+                console.log(data.token);
+                const p = new Promise((resolve) => {
+                    handleCookie(data.token);
+                    localStorage.setItem('login', data.token);
+                    
+                    resolve();
+                });
+                p.then(() => {
+                    history.push(Routes.HOME);
+                })
 
-                history.push(Routes.HOME);
-                window.location.reload();
 
-                // _this.props.setLogin( data.token );
             }
-        })
-
-        .catch((error) => {
+        }).catch((error) => {
+            console.log(error);
             // strip htlm tags for client friendly error
             function strip_html_tags(str) {
                 if ((str===null) || (str===''))

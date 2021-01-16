@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { HeaderContainer, LocalTunesContext, Navigation} from '../components';
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import openGeocoder from 'node-open-geocoder';
 
 
 
 
+import * as Routes from '../routes';
 
 const Home = () => {
 
-    const { setCity, setLat, setLong, getDistance, value, setValue } = useContext(LocalTunesContext)
+    const history = useHistory();
+    const { setCity, setLat, setLong, getDistance, value, setValue, verifyUser } = useContext(LocalTunesContext)
     const [recentAlbums, setRecentAlbums] = useState('');
     const [topAlbums, setTopAlbums] = useState('');
     const [ finalAlbums, setRecentFinalAlbums] = useState([]);
@@ -25,6 +27,11 @@ const Home = () => {
       output.innerHTML = this.value;
     }
     */
+
+   console.log(verifyUser());
+   if(verifyUser() === false) {
+       history.push(Routes.LOGIN)
+   }
     const apiUrlRecentAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?order=desc&per_page=6`;
     const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?filter[orderby]=likes&order=desc`;
     // const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media/filter[orderby]=likes&order=desc`;
@@ -36,7 +43,6 @@ const Home = () => {
             // 'Authorization': `Bearer ${localStorage.getItem('login')}`,
         },
     };
-
     useEffect(  () => {
 
         /*

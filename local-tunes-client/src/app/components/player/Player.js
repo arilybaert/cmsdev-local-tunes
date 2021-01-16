@@ -86,7 +86,11 @@ const Player = () => {
 
                     <div className="row">
                         <div className="col-3">
+                            {playerCover.length > 0? 
                             <img src={playerCover} title="cover-art" alt="cover-art" className="a-playerImg" id="a-cover-art"></img>
+                            :
+                            <img src="https://yt3.ggpht.com/_LrWtxX1Yu7dg_VyTdoTI6xBBQ1Lja_aRrUkgrFGOxGtWRIBjnm3BcemtmEWRQIVZs54ckUQxg=s900-c-k-c0x00ffffff-no-rj" title="cover-art" alt="cover-art" className="a-playerImg" id="a-cover-art"></img>
+                            }
                         </div>
                         
                         <div className="col-6 m-currentTrackMiniPlayer">

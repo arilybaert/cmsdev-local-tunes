@@ -1,9 +1,11 @@
 import React, {createContext, useState } from 'react';
+import { useCookies } from "react-cookie";
 
+import * as jwt  from "jsonwebtoken";
 const LocalTunesContext = createContext();
 
 const LocalTunesContextProvider = ({children}) => {
-
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
     const [ collectionHeader, setCollectionHeader ] = useState("playlists");
 
     const [ audioSrc, setAudioSrc ] = useState();
@@ -31,7 +33,7 @@ const LocalTunesContextProvider = ({children}) => {
 
     const [ playerSong, setPlayerSong ] = useState();
     const [ playerArtist, setPlayerArtist ] = useState();
-    const [ playerCover, setPlayerCover ] = useState();
+    const [ playerCover, setPlayerCover ] = useState('');
     const [ playerStatus, setPlayerStatus ] = useState(false);
 
     const deg2rad = (deg)  => {
@@ -53,8 +55,24 @@ const LocalTunesContextProvider = ({children}) => {
 
       const [ value, setValue ] = useState(50);
 
+      const verifyUser = () => {
+
+        const token = cookies.login
+        try {
+          let value = 'elo';
+            const decoded = jwt.verify(token, 'Vd9qWVP<M1 -N+#0U]By3wor#>2mJae|JE)ofqL48p-@K.k3c5hQ#ld`jf$0D-ng');
+            if(Date.now() <= decoded.exp * 1000) {
+                value =  true;
+            }
+            return value;
+
+        } catch {
+            return false;
+        }
+
+   };
     return (
-        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus, value, setValue }}>
+        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus, value, setValue, verifyUser, cookies, setCookie, removeCookie }}>
 
             {children}
 
