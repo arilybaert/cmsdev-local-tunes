@@ -12,7 +12,7 @@ const Playlist = () => {
     // context
     const { popupState, setPopupState, setPlayerStatus} = useContext(LocalTunesContext);
     const { setAlbumTitle, setAlbumImage, setArtistTitle, artistTitle, albumImage } = useContext(LocalTunesContext);
-    const { setAudioSrc, setPlayerSong, setPlayerArtist, setPlayerCover } = useContext(LocalTunesContext);
+    const { setAudioSrc, setPlayerSong, setPlayerArtist, setPlayerCover, setArtistId } = useContext(LocalTunesContext);
 
 
     // states
@@ -92,6 +92,8 @@ const Playlist = () => {
         ).then((res) => {
             setAlbumTitle(res.data.acf.title);
             setArtistTitle(res.data.acf.artist.data.display_name);
+            setArtistId(res.data.acf.artist.data.ID);
+            console.log(res.data.acf.artist.data.ID);
             setAlbumImage(res.data.acf.image.guid);
             setSongs(res.data.acf.songs);
         }).catch((err) => {

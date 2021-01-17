@@ -7,6 +7,7 @@ const ArtistContent = () => {
 
     const { artistTitle, artistImage } = useContext(LocalTunesContext);
 
+    console.log('hey')
     const handleArtistTrash = () => {
         let result = window.confirm("Want to unfollow artist?");
         if (result) {
