@@ -37,6 +37,8 @@ const LocalTunesContextProvider = ({children}) => {
     const [ playerCover, setPlayerCover ] = useState('');
     const [ playerStatus, setPlayerStatus ] = useState(false);
 
+    const [ followedArtists, setFollowedArtists ] = useState([]);
+    const [ artistLikeId, setArtistLikeId ] = useState();
     const deg2rad = (deg)  => {
         return deg * (Math.PI/180)
       }
@@ -74,7 +76,7 @@ const LocalTunesContextProvider = ({children}) => {
 
    };
     return (
-        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus, value, setValue, verifyUser, cookies, setCookie, removeCookie, setUid, uid, artistId, setArtistId }}>
+        <LocalTunesContext.Provider value={{collectionHeader, setCollectionHeader, popupState, setPopupState, playlistImage, setPlaylistImage, playlistTitle, setPlaylistTitle, artistImage, setArtistImage, artistTitle, setArtistTitle, genreTitle, setGenreTitle, discoverState, setDiscoverState, searchTerm, setSearchTerm, login, setLogin, albumImage, albumTitle, setAlbumTitle, setAlbumImage, audioSrc, setAudioSrc, lat, setLat, long, setLong, city, setCity, getDistance, playerSong, setPlayerSong, playerArtist, setPlayerArtist, playerCover, setPlayerCover, playerStatus, setPlayerStatus, value, setValue, verifyUser, cookies, setCookie, removeCookie, setUid, uid, artistId, setArtistId, followedArtists, setFollowedArtists, artistLikeId, setArtistLikeId }}>
 
             {children}
 

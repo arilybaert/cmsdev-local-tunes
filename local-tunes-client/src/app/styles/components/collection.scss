@@ -177,7 +177,14 @@
 /*
     Song
 */
-
+.a-songOverviewButton {
+    font-size: 15pt;
+    color: $accent-color;
+}
+.a-songOverviewButtonAlt {
+    font-size: 15pt;
+    color: $white-color;
+}
 .o-collectionSongOverview {
     padding-top: 1rem;
     padding-bottom: 9rem;
