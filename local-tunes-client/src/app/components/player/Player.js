@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause, faChevronDown, faForward, faBackward } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons';
 
 
 import { LocalTunesContext } from '../context';

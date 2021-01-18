@@ -1,14 +1,11 @@
 import React, {  useContext, useEffect, useState }  from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faHeart, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 import {HeaderContainer, LocalTunesContext, Navigation } from '../components';
-import SongPopup from '../components/songPopup';
 import axios from 'axios';
 
 const Artist = () => {
-    const { uid, artistId, setArtistImage, setFollowedArtists, setLikedArtistsId } = useContext(LocalTunesContext);
+    const { uid, setArtistImage, setFollowedArtists, setLikedArtistsId } = useContext(LocalTunesContext);
 
     let { id } = useParams();
     
@@ -29,6 +26,7 @@ const Artist = () => {
         fetchAlbums(id);
         fetchFollows(uid);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
     // 30
     const fetchAlbums = (id) => {

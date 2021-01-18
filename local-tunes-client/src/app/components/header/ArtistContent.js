@@ -13,24 +13,20 @@ const ArtistContent = () => {
     const checkLikes = () => {
         document.getElementById('discover').classList.remove("a-songOverviewButtonAlt");
         document.getElementById('discover').classList.remove("a-songOverviewButton");
-        console.log(followedArtists.includes(parseInt(artistLikeId)))
         if(followedArtists.includes(parseInt(artistLikeId))) {
-            console.log("in");
             document.getElementById('discover').classList.add("a-songOverviewButton");
         } else {
-            console.log("out");
             document.getElementById('discover').classList.add("a-songOverviewButtonAlt");
         }
     }
     useEffect(() => {
         checkLikes();
-        // console.log(artistLikeId)
         
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [followedArtists]);
 
     const handleArtistTrash = () => {
         const array = followedArtists
-        console.log(array);
         const index = array.indexOf(parseInt(artistLikeId));
         if (index > -1) {
             array.splice(index, 1);

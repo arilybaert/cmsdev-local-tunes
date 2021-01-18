@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from'react';
+import React from'react';
 import {BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { CookiesProvider } from "react-cookie";
 import * as Routes from './routes'

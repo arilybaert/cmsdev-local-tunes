@@ -14,7 +14,7 @@ const Home = () => {
     const history = useHistory();
     const { setCity, getDistance, value, setValue, verifyUser, cookies } = useContext(LocalTunesContext)
     const [recentAlbums, setRecentAlbums] = useState('');
-    const [topAlbums, setTopAlbums] = useState('');
+    const [topAlbums] = useState('');
     const [ finalAlbums, setRecentFinalAlbums] = useState([]);
     const [ removedAlbums, setRemovedAlbums] = useState([]);
     /*
@@ -32,7 +32,7 @@ const Home = () => {
        history.push(Routes.LOGIN)
    }
     const apiUrlRecentAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?order=desc&per_page=6`;
-    const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?filter[orderby]=likes&order=desc`;
+    // const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/albums?filter[orderby]=likes&order=desc`;
     // const apiUrlTopAlbums = `${process.env.REACT_APP_URL}/wp-json/wp/v2/media/filter[orderby]=likes&order=desc`;
 
     const config = {
@@ -102,6 +102,7 @@ useEffect(() => {
         })
         setRecentFinalAlbums(array);
     }
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[value])
 
     useEffect(()=> {
@@ -121,7 +122,7 @@ useEffect(() => {
             console.log(err.response.data.message);
         });
     };
-
+/*
     const fetchTopAlbums = () => {
         axios.get(
             apiUrlTopAlbums,
@@ -133,6 +134,7 @@ useEffect(() => {
             console.log(err.response.data.message);
         });
     }
+*/
     useEffect(() => {
         // fetchTopAlbums();
         fetchRecentAlbums();

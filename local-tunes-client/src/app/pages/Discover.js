@@ -45,6 +45,7 @@ const Discover = () => {
             setSearchState(false);
         }
         // console.log(searchTerm.length);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[searchTerm]);
 
 
