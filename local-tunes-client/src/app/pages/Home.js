@@ -77,33 +77,47 @@ const Home = () => {
 
 
 
-
-useEffect(() => {
-    const arr = []
+useEffect (() => {
     if(finalAlbums.length > 0) {
         finalAlbums.forEach((album, index) => {
-            console.log(album.distance)
             if(album.distance > value) {
-                arr.push(finalAlbums[index]);
-                finalAlbums.splice(index, 1)
+                document.getElementById(album.id).classList.add("hide");
+            } else {
+                try {
+                    document.getElementById(album.id).classList.remove("hide");
+                } catch {}
+            }
+            })
+        }
+
+},[value]);
+
+// useEffect(() => {
+//     const arr = []
+//     if(finalAlbums.length > 0) {
+//         finalAlbums.forEach((album, index) => {
+//             console.log(album.distance)
+//             if(album.distance > value) {
+//                 arr.push(finalAlbums[index]);
+//                 finalAlbums.splice(index, 1)
                 
-            }
-        })
-        setRemovedAlbums(arr);
-        setRecentFinalAlbums(finalAlbums);
-    }
-    const array = finalAlbums;
-    if(removedAlbums.length > 0) {
-        removedAlbums.forEach((album, index) => {
-            console.log(album);
-            if(album.distance < value) {
-                array.push(album[index])
-            }
-        })
-        setRecentFinalAlbums(array);
-    }
-// eslint-disable-next-line react-hooks/exhaustive-deps
-},[value])
+//             }
+//         })
+//         setRemovedAlbums(arr);
+//         setRecentFinalAlbums(finalAlbums);
+//     }
+//     const array = finalAlbums;
+//     if(removedAlbums.length > 0) {
+//         removedAlbums.forEach((album, index) => {
+//             console.log(album);
+//             if(album.distance < value) {
+//                 array.push(album[index])
+//             }
+//         })
+//         setRecentFinalAlbums(array);
+//     }
+// // eslint-disable-next-line react-hooks/exhaustive-deps
+// },[value])
 
     useEffect(()=> {
         // console.log(recentAlbums);
@@ -149,7 +163,7 @@ useEffect(() => {
             <div className="row o-homeSection">
                 <div className="col-12 a-homeSectionTitle">All New Release</div>
                 { finalAlbums && finalAlbums.map((data, index) => 
-                    <Link to={`/album/${data.id}`} className="col-4 col-md-3 o-releaseCard" key={index}>
+                    <Link to={`/album/${data.id}`} className="col-4 col-md-3 o-releaseCard" key={index} id={data.id}>
                         <div className="m-releaseCard">
                             <img src={data.acf.image.guid} alt="cover-art" title="cover-art" className="a-cardImg"></img>
                             <span className="a-albumTitleHome">{data.acf.title}</span>
