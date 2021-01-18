@@ -4,7 +4,25 @@
     align-self: center;
     flex-direction: column;
     color: $white-color;
-
+    a:link {
+        color: $white-color;
+        text-decoration: none;
+    }
+    
+    a:visited {
+        color: $white-color;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: $accent-color;
+        text-decoration: none;
+    }
+    
+    a:active {
+        color: $white-color;
+        text-decoration: none;
+    }
     .m-settings {
         margin-top: 0.2rem;
         text-align: center;
@@ -12,6 +30,7 @@
     }
     .a-settingItem {
         font-size: 16pt;
+        cursor: pointer;
     }
 }
 .a-settingsHeader {

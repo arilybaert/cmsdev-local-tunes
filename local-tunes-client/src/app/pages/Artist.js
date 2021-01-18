@@ -5,13 +5,14 @@ import {HeaderContainer, LocalTunesContext, Navigation } from '../components';
 import axios from 'axios';
 
 const Artist = () => {
-    const { uid, setArtistImage, setFollowedArtists, setLikedArtistsId } = useContext(LocalTunesContext);
+    const { uid, setArtistImage, setFollowedArtists, setLikedArtistsId, setArtistTitle, setArtistId } = useContext(LocalTunesContext);
 
     let { id } = useParams();
     
     const [ albums, setAlbums ] = useState();
     const apiUserID = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
     const apiUserFollows = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=`;
+    const apiArtistID = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/`;
 
     const config = {
         method: 'GET',
@@ -20,8 +21,19 @@ const Artist = () => {
             'Authorization': `Bearer ${localStorage.getItem('login')}`,
         },
     };
+    const fetchArtist = () => {
+        axios.get(
+            apiArtistID + id,
+            config
+        ).then((res) => {
+            setArtistId(id);
+            setArtistTitle(res.data.name);
 
+
+        })
+    }
     useEffect (() => {
+        fetchArtist();
         setArtistImage("https://pyxis.nymag.com/v1/imgs/045/fed/60966d175a6a6e653e21f0eeda4884dca3-27-radiohead-1993.rsquare.w700.jpg");
         fetchAlbums(id);
         fetchFollows(uid);
@@ -52,14 +64,12 @@ const Artist = () => {
                 apiUserFollows + res.data.id,
                 config
             ).then((res) => {
-                console.log(res.data[0])
                 setLikedArtistsId(res.data[0].id);
                 if(res.data[0].acf.artists !== false ) {
                     const follows = []
                     res.data[0].acf.artists.forEach(element => {
                         follows.push(element.ID);
                     });
-                    console.log(follows);
                     setFollowedArtists(follows);
                     
                 }

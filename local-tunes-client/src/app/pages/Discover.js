@@ -21,6 +21,7 @@ const Discover = () => {
             apiUrlSearchSong + term,
             config
         ).then((res) => {
+            console.log(res);
             setSearchSongResults(res.data);
         })
     }

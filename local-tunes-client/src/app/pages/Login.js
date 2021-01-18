@@ -2,11 +2,12 @@ import React, { useState, useContext } from 'react';
 import { Header, LocalTunesContext } from '../components/';
 import * as Routes from '../routes';
 import { useHistory } from "react-router-dom";
-
+import  {ApiConfig} from "../config";
 import axios from 'axios';
 
 
 const Login = () => {
+    const base_url = `${ApiConfig.base_url}`;
     const history = useHistory();
     const {setCookie, verifyUser, cookies } = useContext(LocalTunesContext);
 
@@ -27,7 +28,7 @@ const Login = () => {
           [event.target.name]: value
         });
     }
-    const apiUrl = `${process.env.REACT_APP_URL}/wp-json/jwt-auth/v1/token`;
+    const apiUrl = `${base_url}/wp-json/jwt-auth/v1/token`;
     
     const handleCookie = (token) => {
         setCookie("login", token, {

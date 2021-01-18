@@ -3,17 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faHeart } from '@fortawesome/free-solid-svg-icons';
 import { LocalTunesContext } from '../../components';
 import axios from 'axios';
+import {useParams} from "react-router-dom";
 
 const ArtistContent = () => {
 
     const { artistTitle, artistImage, followedArtists, setFollowedArtists, artistLikeId, likedArtistsId } = useContext(LocalTunesContext);
-    const apiUrl = `${process.env.REACT_APP_URL}wp-json/wp/v2/songs/`;
-    const apiUserID = `${process.env.REACT_APP_URL}wp-json/wp/v2/users/me`;
+    const apiUrl = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs/`;
+    const apiUserID = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
 
     const checkLikes = () => {
         document.getElementById('discover').classList.remove("a-songOverviewButtonAlt");
         document.getElementById('discover').classList.remove("a-songOverviewButton");
-        if(followedArtists.includes(parseInt(artistLikeId))) {
+        if(followedArtists.includes(parseInt(id))) {
             document.getElementById('discover').classList.add("a-songOverviewButton");
         } else {
             document.getElementById('discover').classList.add("a-songOverviewButtonAlt");
@@ -24,15 +25,20 @@ const ArtistContent = () => {
         
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [followedArtists]);
+    let { id } = useParams();
+
 
     const handleArtistTrash = () => {
+        
         const array = followedArtists
-        const index = array.indexOf(parseInt(artistLikeId));
+        console.log(array);
+        const index = array.indexOf(parseInt(id));
         if (index > -1) {
             array.splice(index, 1);
         } else {
-            array.push(parseInt(artistLikeId));
+            array.push(parseInt(id));
         }
+        console.log(array);
         setFollowedArtists(array);
         checkLikes();
         const body = {

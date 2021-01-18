@@ -165,9 +165,9 @@ const Upload = () => {
 
 
             <div className="row">
-                <div className="col-12 o-form">
+                <div className="col-12 o-form  ">
 
-                    <form className="m-form">
+                    <form className="m-form m-form-upload">
                         <label htmlFor="musicfile" className="a-authTextLabel">Music file</label>
                         <input type="file" name="musicfile" className="a-authTextInput" id="a-music" multiple></input>
 

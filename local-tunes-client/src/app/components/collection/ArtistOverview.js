@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faHeart } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import {  faHeart } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 const ArtistOverview = () => {
@@ -9,7 +9,7 @@ const ArtistOverview = () => {
     const [ artistsArr, setArtistsArr ] = useState()
 
     const apiUserID = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
-    const apiUrlArtists = `${process.env.REACT_APP_URL}wp-json/wp/v2/songs?slug=`;
+    const apiUrlArtists = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=`;
     const config = {
         method: 'GET',
         mode: 'no-cors',
@@ -37,13 +37,14 @@ const ArtistOverview = () => {
 
     useEffect(() => {
         fetchArtist();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-    const handleTrash = () => {
-        let result = window.confirm("Want to delete?");
-        if (result) {
-            console.log("artist playlist");
-        }
-    }
+    // const handleTrash = () => {
+    //     let result = window.confirm("Want to delete?");
+    //     if (result) {
+    //         console.log("artist playlist");
+    //     }
+    // }
 
     return (
         <div className="row o-collectionArtistOverview">

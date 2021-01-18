@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, {useContext, useEffect, useState} from 'react';
 import {Link, useHistory} from 'react-router-dom';
-import {HeaderContainer, LocalTunesContext, Player} from '../components';
+import {HeaderContainer, LocalTunesContext, Player, Navigation} from '../components';
 import * as Routes from '../routes';
 
 const Settings = () => {
     const history = useHistory();
     const { removeCookie, setUid, uid } = useContext(LocalTunesContext)
     const [ allowUpload, setAllowUpload]= useState(false);
-    const apiUrlRole = `${process.env.REACT_APP_URL}wp-json/wp/v2/users/me`;
+    const apiUrlRole = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
     // const apiUrlRoleAdd = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/${uid}`;
     const config = {
         method: 'POST',
@@ -17,7 +17,6 @@ const Settings = () => {
             'Authorization': `Bearer ${localStorage.getItem('login')}`,
         },
     }
-    console.log(uid);
     const handleLogout = () => {
         console.log("logout");
         removeCookie("login", {
@@ -87,6 +86,8 @@ const Settings = () => {
                 </div>
 
             </div>
+            <Navigation/>
+
         </div>
 
     );

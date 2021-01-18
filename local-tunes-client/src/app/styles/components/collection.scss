@@ -103,8 +103,8 @@
 }
 .a-artistDetailCover {
     border-radius: 50%;
-    width: 21vw;
-    height: 21vw;
+    width: 10vh;
+    height: 10vh;
 }
 
 .o-artistSection {
@@ -242,6 +242,7 @@
         background-color: rgba(76, 76, 76, 0.909);
         border-radius: 13px 13px 0 0;
         z-index: 1000;
+        padding-bottom: 5rem;
 
         .m-songPopup {
             display: flex;
