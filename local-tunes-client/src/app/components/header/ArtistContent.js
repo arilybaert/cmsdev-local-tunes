@@ -6,14 +6,11 @@ import axios from 'axios';
 
 const ArtistContent = () => {
 
-    const { artistTitle, artistImage, followedArtists, setFollowedArtists, artistLikeId } = useContext(LocalTunesContext);
-    const apiUrl = `${process.env.REACT_APP_URL}wp-json/wp/v2/users/`;
+    const { artistTitle, artistImage, followedArtists, setFollowedArtists, artistLikeId, likedArtistsId } = useContext(LocalTunesContext);
+    const apiUrl = `${process.env.REACT_APP_URL}wp-json/wp/v2/songs/`;
     const apiUserID = `${process.env.REACT_APP_URL}wp-json/wp/v2/users/me`;
 
-    
-    useEffect(() => {
-        console.log(followedArtists);
-        console.log(artistLikeId)
+    const checkLikes = () => {
         document.getElementById('discover').classList.remove("a-songOverviewButtonAlt");
         document.getElementById('discover').classList.remove("a-songOverviewButton");
         console.log(followedArtists.includes(parseInt(artistLikeId)))
@@ -24,16 +21,24 @@ const ArtistContent = () => {
             console.log("out");
             document.getElementById('discover').classList.add("a-songOverviewButtonAlt");
         }
+    }
+    useEffect(() => {
+        checkLikes();
+        // console.log(artistLikeId)
+        
     }, [followedArtists]);
 
     const handleArtistTrash = () => {
         const array = followedArtists
-        const index = array.indexOf(artistLikeId);
+        console.log(array);
+        const index = array.indexOf(parseInt(artistLikeId));
         if (index > -1) {
             array.splice(index, 1);
         } else {
-            array.push(artistLikeId);
+            array.push(parseInt(artistLikeId));
         }
+        setFollowedArtists(array);
+        checkLikes();
         const body = {
             "fields": {
                 "artists": array
@@ -58,17 +63,14 @@ const ArtistContent = () => {
                 },
             }
             axios.post(
-                apiUrl + res.data.id,
-                config,
-                body
+                apiUrl + likedArtistsId,
+                body,
+                config
             ).then((res) => console.log(res));
     })
 
 
-        let result = window.confirm("Want to unfollow artist?");
-        if (result) {
-            console.log("unfollowed artist");
-        }
+
     }
     return (
         <div className="row o-homeHeader">

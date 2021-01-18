@@ -8,13 +8,13 @@ import SongPopup from '../components/songPopup';
 import axios from 'axios';
 
 const Artist = () => {
-    const { uid, artistId, setArtistImage, setFollowedArtists } = useContext(LocalTunesContext);
+    const { uid, artistId, setArtistImage, setFollowedArtists, setLikedArtistsId } = useContext(LocalTunesContext);
 
     let { id } = useParams();
     
     const [ albums, setAlbums ] = useState();
     const apiUserID = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/me`;
-    const apiUserFollows = `${process.env.REACT_APP_URL}/wp-json/wp/v2/users/`;
+    const apiUserFollows = `${process.env.REACT_APP_URL}/wp-json/wp/v2/songs?slug=`;
 
     const config = {
         method: 'GET',
@@ -54,11 +54,14 @@ const Artist = () => {
                 apiUserFollows + res.data.id,
                 config
             ).then((res) => {
-                if(res.data.acf.artists !== false ) {
+                console.log(res.data[0])
+                setLikedArtistsId(res.data[0].id);
+                if(res.data[0].acf.artists !== false ) {
                     const follows = []
-                    res.data.acf.artists.forEach(element => {
+                    res.data[0].acf.artists.forEach(element => {
                         follows.push(element.ID);
                     });
+                    console.log(follows);
                     setFollowedArtists(follows);
                     
                 }
